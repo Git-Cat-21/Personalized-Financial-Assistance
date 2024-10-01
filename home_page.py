@@ -1,17 +1,12 @@
 from tkinter import *
 
 root=Tk()
-#root.title('Title')
 root.geometry("600x600")
-# frame=Frame(root,width=1000,height=1000,bg='red')
-# frame.pack()
 title=Label(root,text='Title')
 title.pack(side=TOP)
-#title.insert(END,'Title')
 
 signup = Button(root, text='Signup')
 signup.place(x=375,y=40)
-#signup.grid(row=4,column=5)
 login = Button(root, text='Login')
 login.place(x=420,y=40)
 about_us = Button(root, text='About Us')
@@ -22,5 +17,5 @@ about_us_text=Label(root,text='About Us:')
 about_us_text.place(x=0,y=100)
 contact_us_text=Label(root,text='Contact Us:')
 contact_us_text.place(x=0,y=200)
-#about_us.grid(row=5,column=5)
+
 root.mainloop()

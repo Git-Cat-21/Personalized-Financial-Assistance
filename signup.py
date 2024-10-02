@@ -1,5 +1,12 @@
 from tkinter import *
-from tkinter import font
+from tkinter import font,ttk
+from tkcalendar import Calendar
+import random
+
+def create_user():
+    rand_num=random.randint(100000,999999)
+    user_id.config(text=f"Your user id is: {rand_num}")
+
 
 root=Tk()
 root.geometry("600x600")
@@ -43,22 +50,25 @@ ifsc_entry=Entry(root)
 ifsc_entry.place(x=450,y=90)
 status=Label(root,text='Account status:')
 status.place(x=330,y=120)
-status_entry=Entry(root)
+statuss=['Active','Inactive']
+status_entry=ttk.Combobox(root,values=statuss,width=17,font=('Arial',8))
 status_entry.place(x=450,y=120)
 type=Label(root,text='Account type:')
 type.place(x=330,y=150)
-type_entry=Entry(root)
+types=["Savings","Current"]
+type_entry=ttk.Combobox(root,values=types,width=17,font=('Arial',8))
 type_entry.place(x=450,y=150)
 created_on=Label(root,text='Account created on:')
 created_on.place(x=330,y=180)
 created_on_entry=Entry(root)
 created_on_entry.place(x=450,y=180)
+format=Label(root,text='(in dd-mmm-yyyy)')
+format.place(x=330,y=200)
 
-
-submit=Button(root,text='Signup')
+submit=Button(root,text='Signup',command=create_user)
 submit.place(x=270,y=300)
-user_id=Label(root,text='Your user id is:15346')
+user_id=Label(root,text='')
 user_id.place(x=240,y=330)
-submit=Button(root,text='Return to login page',borderwidth=0,font=font.Font(underline=True))
-submit.place(x=220,y=350)
+return_back=Button(root,text='Return to login page',borderwidth=0,font=('Arial',10,'underline'))
+return_back.place(x=230,y=350)
 root.mainloop()

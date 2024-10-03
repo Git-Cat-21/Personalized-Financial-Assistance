@@ -2,7 +2,7 @@ import mysql.connector
 from tkinter import * 
 from tkinter import ttk
 
-connection=mysql.connector.connect(host="localhost",user="root",password="mysql@123",database="pfa_orange")
+connection=mysql.connector.connect(host="localhost",user="root",password="password",database="pfa_orange")
 cursor=connection.cursor()
 
 

@@ -1,23 +1,32 @@
 from tkinter import *
 from tkinter import font
-root=Tk()
-root.geometry("600x600")
-title=Label(root,text='Login Page',font=('Arial',16,'bold'))
-title.pack()
-user_id=Label(root,text='User ID:',font=('Arial',12))
-user_id.place(x=230,y=100)
-user_id_entry=Entry(root)
-user_id_entry.place(x=300,y=100)
 
-pwd=Label(root,text='Password:',font=('Arial',12))
-pwd.place(x=220,y=150)
-pwd_entry=Entry(root)
-pwd_entry.place(x=300,y=150)
+root = Tk()
+root.title("Login Page")
+root.geometry("1000x1000")
 
-submit=Button(root,text='Login',font=('Arial',10))
-submit.place(x=270,y=200)
+title = Label(root, text='Login Page', font=('Arial', 20, 'bold'), bg='lightgrey', pady=10)
+title.pack(side=TOP, fill=X)
 
-forgot=Button(root,text='Forgot Password?',borderwidth=0,font=font.Font(size=10,underline=True))
-forgot.place(x=240,y=230)
+form_frame = Frame(root, pady=10)
+form_frame.pack(pady=150)
+
+user_id = Label(form_frame, text='User ID:', font=('Arial', 14))
+user_id.grid(row=0, column=0, padx=20, pady=10, sticky=E)
+user_id_entry = Entry(form_frame, font=('Arial', 12), width=25)
+user_id_entry.grid(row=0, column=1, padx=20, pady=10)
+
+pwd = Label(form_frame, text='Password:', font=('Arial', 14))
+pwd.grid(row=1, column=0, padx=20, pady=10, sticky=E)
+pwd_entry = Entry(form_frame, font=('Arial', 12), width=25, show='*')
+pwd_entry.grid(row=1, column=1, padx=20, pady=10)
+
+submit = Button(form_frame, text='Login', font=('Arial', 12), width=10, bg='lightblue')
+submit.grid(row=2, column=0, columnspan=2, pady=20)
+
+forgot = Button(form_frame, text='Forgot Password?', font=font.Font(size=10, underline=True), borderwidth=0, fg='blue')
+forgot.grid(row=3, column=0, columnspan=2, pady=10)
+
+root.configure(bg='lightgrey')
 
 root.mainloop()

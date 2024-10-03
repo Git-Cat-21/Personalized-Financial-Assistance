@@ -2,6 +2,23 @@ CREATE DATABASE IF NOT EXISTS pfa_orange;
 
 USE pfa_orange;
 
+CREATE TABLE USER_DETAILS(
+    User_ID INT PRIMARY KEY,
+    User_name VARCHAR(50),
+    Mob long constraint ck1 check(Mob like '[0-9]{10}'),
+    Email_id VARCHAR(30) constraint ck2 check(Email_id like '%_@__%.__%'),
+    Dob DATE,
+    Pwd VARCHAR(20)
+);
+CREATE TABLE ACCOUNT_DETAILS(
+    acc_no BIGINT PRIMARY KEY,
+    ifsc VARCHAR(20),
+    acc_status ENUM('Active','Inactive'),
+    acc_type ENUM('Savings','Current'),
+    acc_create DATE,
+    user_id int,
+    Foreign Key (user_id) REFERENCES user_details(User_ID)
+);
 CREATE TABLE schemes(
     Scheme_ID INT PRIMARY KEY,
     Scheme_Name VARCHAR(40),

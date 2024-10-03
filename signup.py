@@ -1,74 +1,90 @@
 from tkinter import *
-from tkinter import font,ttk
+from tkinter import font, ttk
 from tkcalendar import Calendar
 import random
 
 def create_user():
-    rand_num=random.randint(100000,999999)
+    rand_num = random.randint(100000, 999999)
     user_id.config(text=f"Your user id is: {rand_num}")
 
+root = Tk()
+root.title('Signup Page')
+root.geometry("1000x1000")
 
-root=Tk()
-root.geometry("600x600")
+title = Label(root, text='Signup Page', font=('Arial', 20, 'bold'), bg='lightgrey', pady=10)
+title.pack(side=TOP, fill=X)
 
-title=Label(root,text='Signup Page')
-title.pack()
-#Personal info
-name=Label(root,text='Name:')
-name.place(x=5,y=60)
-name_entry=Entry(root)
-name_entry.place(x=120,y=60)
-mob=Label(root,text='Mobile number:')
-mob.place(x=5,y=90)
-mob_entry=Entry(root)
-mob_entry.place(x=120,y=90)
-email=Label(root,text='Email:')
-email.place(x=5,y=120)
-email_entry=Entry(root)
-email_entry.place(x=120,y=120)
-dob=Label(root,text='Date of birth:')
-dob.place(x=5,y=150)
-dob_entry=Entry(root)
-dob_entry.place(x=120,y=150)
-pwd=Label(root,text='Password:')
-pwd.place(x=5,y=180)
-pwd_entry=Entry(root)
-pwd_entry.place(x=120,y=180)
-conf_pwd=Label(root,text='Confirm Password:')
-conf_pwd.place(x=5,y=210)
-conf_pwd_entry=Entry(root)
-conf_pwd_entry.place(x=120,y=210)
+form_frame = Frame(root, pady=20)
+form_frame.pack(pady=50)
 
-#Account details
-acc_no=Label(root,text='Account number:')
-acc_no.place(x=330,y=60)
-acc_no_entry=Entry(root)
-acc_no_entry.place(x=450,y=60)
-ifsc=Label(root,text='IFSC Code:')
-ifsc.place(x=330,y=90)
-ifsc_entry=Entry(root)
-ifsc_entry.place(x=450,y=90)
-status=Label(root,text='Account status:')
-status.place(x=330,y=120)
-statuss=['Active','Inactive']
-status_entry=ttk.Combobox(root,values=statuss,width=17,font=('Arial',8))
-status_entry.place(x=450,y=120)
-type=Label(root,text='Account type:')
-type.place(x=330,y=150)
-types=["Savings","Current"]
-type_entry=ttk.Combobox(root,values=types,width=17,font=('Arial',8))
-type_entry.place(x=450,y=150)
-created_on=Label(root,text='Account created on:')
-created_on.place(x=330,y=180)
-created_on_entry=Entry(root)
-created_on_entry.place(x=450,y=180)
-format=Label(root,text='(in dd-mmm-yyyy)')
-format.place(x=330,y=200)
+name = Label(form_frame, text='Name:', font=('Arial', 12))
+name.grid(row=0, column=0, padx=20, pady=10, sticky=E)
+name_entry = Entry(form_frame, font=('Arial', 12), width=25)
+name_entry.grid(row=0, column=1, padx=20, pady=10)
 
-submit=Button(root,text='Signup',command=create_user)
-submit.place(x=270,y=300)
-user_id=Label(root,text='')
-user_id.place(x=240,y=330)
-return_back=Button(root,text='Return to login page',borderwidth=0,font=('Arial',10,'underline'))
-return_back.place(x=230,y=350)
+mob = Label(form_frame, text='Mobile number:', font=('Arial', 12))
+mob.grid(row=1, column=0, padx=20, pady=10, sticky=E)
+mob_entry = Entry(form_frame, font=('Arial', 12), width=25)
+mob_entry.grid(row=1, column=1, padx=20, pady=10)
+
+email = Label(form_frame, text='Email:', font=('Arial', 12))
+email.grid(row=2, column=0, padx=20, pady=10, sticky=E)
+email_entry = Entry(form_frame, font=('Arial', 12), width=25)
+email_entry.grid(row=2, column=1, padx=20, pady=10)
+
+dob = Label(form_frame, text='Date of birth:', font=('Arial', 12))
+dob.grid(row=3, column=0, padx=20, pady=10, sticky=E)
+dob_entry = Entry(form_frame, font=('Arial', 12), width=25)
+dob_entry.grid(row=3, column=1, padx=20, pady=10)
+
+pwd = Label(form_frame, text='Password:', font=('Arial', 12))
+pwd.grid(row=4, column=0, padx=20, pady=10, sticky=E)
+pwd_entry = Entry(form_frame, font=('Arial', 12), width=25, show='*')
+pwd_entry.grid(row=4, column=1, padx=20, pady=10)
+
+conf_pwd = Label(form_frame, text='Confirm Password:', font=('Arial', 12))
+conf_pwd.grid(row=5, column=0, padx=20, pady=10, sticky=E)
+conf_pwd_entry = Entry(form_frame, font=('Arial', 12), width=25, show='*')
+conf_pwd_entry.grid(row=5, column=1, padx=20, pady=10)
+
+acc_no = Label(form_frame, text='Account number:', font=('Arial', 12))
+acc_no.grid(row=0, column=2, padx=20, pady=10, sticky=E)
+acc_no_entry = Entry(form_frame, font=('Arial', 12), width=25)
+acc_no_entry.grid(row=0, column=3, padx=20, pady=10)
+
+ifsc = Label(form_frame, text='IFSC Code:', font=('Arial', 12))
+ifsc.grid(row=1, column=2, padx=20, pady=10, sticky=E)
+ifsc_entry = Entry(form_frame, font=('Arial', 12), width=25)
+ifsc_entry.grid(row=1, column=3, padx=20, pady=10)
+
+status = Label(form_frame, text='Account status:', font=('Arial', 12))
+status.grid(row=2, column=2, padx=20, pady=10, sticky=E)
+statuss = ['Active', 'Inactive']
+status_entry = ttk.Combobox(form_frame, values=statuss, width=22, font=('Arial', 12))
+status_entry.grid(row=2, column=3, padx=20, pady=10)
+
+type = Label(form_frame, text='Account type:', font=('Arial', 12))
+type.grid(row=3, column=2, padx=20, pady=10, sticky=E)
+types = ["Savings", "Current"]
+type_entry = ttk.Combobox(form_frame, values=types, width=22, font=('Arial', 12))
+type_entry.grid(row=3, column=3, padx=20, pady=10)
+
+created_on = Label(form_frame, text='Account created on:', font=('Arial', 12))
+created_on.grid(row=4, column=2, padx=20, pady=10, sticky=E)
+created_on_entry = Entry(form_frame, font=('Arial', 12), width=25)
+created_on_entry.grid(row=4, column=3, padx=20, pady=10)
+
+format = Label(form_frame, text='(in dd-mmm-yyyy)', font=('Arial', 10))
+format.grid(row=5, column=2, padx=20, pady=10, sticky=E)
+
+submit = Button(form_frame, text='Signup', font=('Arial', 12), command=create_user)
+submit.grid(row=6, column=0, columnspan=4, pady=20)
+
+user_id = Label(form_frame, text='', font=('Arial', 12), fg='green')
+user_id.grid(row=7, column=0, columnspan=4)
+
+return_back = Button(form_frame, text='Return to login page', font=('Arial', 10, 'underline'), borderwidth=0, fg='blue')
+return_back.grid(row=8, column=0, columnspan=4)
+
+root.configure(bg='lightgrey')
 root.mainloop()

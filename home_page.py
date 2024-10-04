@@ -1,4 +1,6 @@
 from tkinter import *
+from login import *
+from signup import *
 def update_text_slideshow():
     global text_index
     text_index += 1
@@ -34,9 +36,9 @@ contact_us = Button(nav_frame, text='Contact Us', font=('Arial', 12), bg='white'
 contact_us.pack(side=RIGHT, padx=10)
 about_us = Button(nav_frame, text='About Us', font=('Arial', 12), bg='white', fg='black', padx=10)
 about_us.pack(side=RIGHT, padx=10)
-login = Button(nav_frame, text='Login', font=('Arial', 12), bg='white', fg='black', padx=10)
+login = Button(nav_frame, text='Login', font=('Arial', 12), bg='white', fg='black', padx=10,command=login_page)
 login.pack(side=RIGHT, padx=10)
-signup = Button(nav_frame, text='Signup', font=('Arial', 12), bg='white', fg='black', padx=10)
+signup = Button(nav_frame, text='Signup', font=('Arial', 12), bg='white', fg='black', padx=10,command=signup_page)
 signup.pack(side=RIGHT, padx=10)
 
 scroll = Scrollbar(root)

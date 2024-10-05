@@ -53,3 +53,5 @@ def login_page():
     root.configure(bg='lightgrey')
 
     root.mainloop()
+
+#login_page()

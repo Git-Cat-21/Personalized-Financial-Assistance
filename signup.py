@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import font, ttk
 from tkcalendar import Calendar
 import random
+from login import *
 
 def create_user():
     rand_num = random.randint(100000, 999999)
@@ -82,11 +83,10 @@ def signup_page():
     submit = Button(form_frame, text='Signup', font=('Arial', 12), command=create_user)
     submit.grid(row=6, column=0, columnspan=4, pady=20)
 
-    user_id = Label(form_frame, text='', font=('Arial', 12), fg='green')
-    user_id.grid(row=7, column=0, columnspan=4)
-
-    return_back = Button(form_frame, text='Return to login page', font=('Arial', 10, 'underline'), borderwidth=0, fg='blue')
-    return_back.grid(row=8, column=0, columnspan=4)
+    return_back = Button(form_frame, text='Login Now', font=('Arial', 12),command=login_page)
+    return_back.grid(row=8, column=0, columnspan=4,pady=20)
 
     root.configure(bg='lightgrey')
     root.mainloop()
+
+# signup_page()

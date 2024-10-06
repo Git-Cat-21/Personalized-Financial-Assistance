@@ -1,15 +1,12 @@
 import mysql.connector
 from tkinter import * 
 from tkinter import ttk
+from savings_dets import *
 
 connection=mysql.connector.connect(host="localhost",user="root",password="password",database="pfa_orange")
 cursor=connection.cursor()
 
-
-
-
 cursor.execute("select * from schemes")
-
 
 root_scheme=Tk()
 
@@ -41,4 +38,8 @@ for row in cursor:
     tree.insert('',i,text="",values=(row[0],row[1],row[2],row[3]))
     i=i+1
 tree.pack()
+
+contact_us = Button(root_scheme, text='Proceed', font=('Arial', 12), bg='white', fg='black', padx=10,command=savings_dets)
+contact_us.pack(side=RIGHT, padx=10)
+
 root_scheme.mainloop()

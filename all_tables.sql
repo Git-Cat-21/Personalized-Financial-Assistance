@@ -22,7 +22,7 @@ CREATE TABLE ACCOUNT_DETAILS(
 CREATE TABLE schemes(
     Scheme_ID INT PRIMARY KEY,
     Scheme_Name VARCHAR(40),
-    Interest_Rate FLOAT NOT NULL,
+    Interest_R0ate FLOAT NOT NULL,
     Duration_In_Years FLOAT NOT NULL
 );
 
@@ -38,3 +38,29 @@ INSERT INTO schemes (Scheme_ID,Scheme_Name,Interest_Rate, Duration_In_Years) VAL
 (9,'ValueSafe High Return FD', 6.75, 1),
 (10,'CapitalMax Booster FD', 7.1, 3);
 SELECT * FROM schemes;
+
+CREATE TABLE SAVINGS_DETAILS (
+    User_ID_savings INT NOT NULL,
+    Account_Number BIGINT UNIQUE NOT NULL,
+    Mobile_Number BIGINT UNIQUE NOT NULL, -- Ensuring it's a 10-digit number
+    Amount FLOAT NOT NULL,
+    PAN CHAR(10) UNIQUE NOT NULL,
+    Maturity_Amount FLOAT NOT NULL,
+    Invested_Date DATE NOT NULL,
+    Maturity_Date DATE NOT NULL,
+    PRIMARY KEY (User_ID_savings, Account_Number),
+    FOREIGN KEY (User_ID_savings) REFERENCES user_details(User_ID),
+    FOREIGN KEY (Account_Number) REFERENCES account_details(acc_no)
+);
+
+SHOW TABLES;
+
+CREATE TABLE transactions(
+    Transaction_ID INT PRIMARY KEY,
+    User_ID INT ,
+    Credited_Amount FLOAT NOT NULL,
+    Credited_Date DATE NOT NULL,
+    Debited_Amount FLOAT NOT NULL,
+    Debited_Date DATE NOT NULL,
+    FOREIGN KEY (User_ID) REFERENCES USER_DETAILS(User_ID)
+);

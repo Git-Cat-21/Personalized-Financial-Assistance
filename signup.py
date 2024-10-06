@@ -1,5 +1,5 @@
 from tkinter import *
-from tkinter import font, ttk
+from tkinter import ttk
 from tkcalendar import Calendar
 import random
 from login import *

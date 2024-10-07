@@ -2,11 +2,11 @@ from tkinter import *
 from tkinter import ttk
 from tkcalendar import Calendar
 import random
-from login import *
+from login import * 
 
 def create_user():
     rand_num = random.randint(100000, 999999)
-    user_id.config(text=f"Your user id is: {rand_num}")
+    user_id.config(text=f"Your user ID is: {rand_num}")
 
 def signup_page():
     global user_id
@@ -83,10 +83,13 @@ def signup_page():
     submit = Button(form_frame, text='Signup', font=('Arial', 12), command=create_user)
     submit.grid(row=6, column=0, columnspan=4, pady=20)
 
-    return_back = Button(form_frame, text='Login Now', font=('Arial', 12),command=login_page)
-    return_back.grid(row=8, column=0, columnspan=4,pady=20)
+    user_id = Label(form_frame, text='', font=('Arial', 12), fg='blue')
+    user_id.grid(row=7, column=0, columnspan=4, pady=10)
+
+    return_back = Button(form_frame, text='Return to Login page', font=('Arial', 12,'underline'),borderwidth=0, command=login_page)
+    return_back.grid(row=8, column=0, columnspan=4, pady=20)
 
     root.configure(bg='lightgrey')
     root.mainloop()
 
-# signup_page()
+#signup_page()

@@ -57,6 +57,3 @@ def savings_dets():
     submit.grid(row=6, column=0, columnspan=4, pady=20)
 
     root_savings_dets.mainloop()
-
-
-savings_dets()

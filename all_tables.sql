@@ -22,7 +22,7 @@ CREATE TABLE ACCOUNT_DETAILS(
 CREATE TABLE schemes(
     Scheme_ID INT PRIMARY KEY,
     Scheme_Name VARCHAR(40),
-    Interest_R0ate FLOAT NOT NULL,
+    Interest_Rate FLOAT NOT NULL,
     Duration_In_Years FLOAT NOT NULL
 );
 

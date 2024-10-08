@@ -32,10 +32,10 @@ title.pack(side=TOP, fill=X)
 
 nav_frame = Frame(root, bg='lightgrey')
 nav_frame.pack(side=TOP, anchor='ne', padx=20, pady=20)
-contact_us = Button(nav_frame, text='My Transactions', font=('Arial', 12), bg='white', fg='black', padx=10)
-contact_us.pack(side=RIGHT, padx=10)
+
 login = Button(nav_frame, text='Login', font=('Arial', 12), bg='white', fg='black', padx=10,command=login_page)
 login.pack(side=RIGHT, padx=10)
+
 signup = Button(nav_frame, text='Signup', font=('Arial', 12), bg='white', fg='black', padx=10,command=signup_page)
 signup.pack(side=RIGHT, padx=10)
 

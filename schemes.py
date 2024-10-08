@@ -106,13 +106,16 @@ def schemes():
     calc_button = Button(form_frame, text="Calculate", font=('Arial', 12, 'bold'), bg="#f0f0f0", fg="black", command=calc)
     calc_button.grid(row=4, columnspan=2, pady=20)
 
+    trans_history = Button(form_frame, text='My Transactions', font=('Arial', 12), bg='white', fg='black', padx=10,command=transactions)
+    trans_history.grid(row=5, columnspan=2, pady=20)
+
     calc_button.bind("<Enter>", on_enter)
     calc_button.bind("<Leave>", on_leave)
 
     proceed_button = Button(form_frame, text="Proceed", font=('Arial', 12, 'bold'), bg="#f0f0f0", fg="black", command=savings_dets)
-    proceed_button.grid(row=5, columnspan=2, pady=20)
+    proceed_button.grid(row=6, columnspan=2, pady=20)
 
     exit_button = Button(form_frame, text="Exit", font=('Arial', 12, 'bold'), bg="#f0f0f0", fg="black", command=root_scheme.destroy)
-    exit_button.grid(row=6, columnspan=2, pady=20)
+    exit_button.grid(row=7, columnspan=2, pady=20)
 
     root_scheme.mainloop()

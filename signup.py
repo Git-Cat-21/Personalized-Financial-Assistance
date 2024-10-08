@@ -2,63 +2,43 @@ from tkinter import *
 from tkinter import ttk
 from tkcalendar import Calendar
 import random
-from login import *  # Assuming login page is imported from a separate module
-
-from tkinter import *
-from tkinter import ttk
-from tkcalendar import Calendar
-import random
-from login import *  # Assuming login page is imported from a separate module
+from login import *
 
 def format_date(date):
-    # Convert date from 'yyyy-mm-dd' to 'dd-mm-yyyy'
     month, day, year = date.split('/')
     return f"{day}/{month}/{year}"
 
 def open_calendar():
-    # Create a Toplevel window to act as a dropdown for the calendar
     top = Toplevel(root)
     top.title("Select Date")
-    
-    # Create a Calendar widget in the Toplevel window
     cal = Calendar(top, selectmode='day', year=2024, month=10, day=8)
     cal.pack(pady=20)
-    
-    # Button to insert the selected date into the text box
+
     def select_date():
-        selected_date = cal.get_date()  # Gets the date in 'yyyy-mm-dd' format
-        formatted_date = format_date(selected_date)  # Format it to 'dd-mm-yyyy'
-        dob_entry.delete(0, END)  # Clear the entry before inserting the date
+        selected_date = cal.get_date()
+        formatted_date = format_date(selected_date)
+        dob_entry.delete(0, END)
         dob_entry.insert(END, formatted_date)
-        top.destroy()  # Close the calendar dropdown after date is selected
+        top.destroy()
     
-    # Button to confirm date selection
     select_btn = ttk.Button(top, text="Select", command=select_date)
     select_btn.pack(pady=10)
 
 def open_calendar1():
-    # Create a Toplevel window to act as a dropdown for the calendar
     top = Toplevel(root)
     top.title("Select Date")
-    
-    # Create a Calendar widget in the Toplevel window
     cal = Calendar(top, selectmode='day', year=2024, month=10, day=8)
     cal.pack(pady=20)
-    
-    # Button to insert the selected date into the text box
+
     def select_date():
-        selected_date = cal.get_date()  # Gets the date in 'yyyy-mm-dd' format
-        formatted_date = format_date(selected_date)  # Format it to 'dd-mm-yyyy'
-        created_on_entry.delete(0, END)  # Clear the entry before inserting the date
+        selected_date = cal.get_date()
+        formatted_date = format_date(selected_date)
+        created_on_entry.delete(0, END)
         created_on_entry.insert(END, formatted_date)
-        top.destroy()  # Close the calendar dropdown after date is selected
+        top.destroy()
     
-    # Button to confirm date selection
     select_btn = ttk.Button(top, text="Select", command=select_date)
     select_btn.pack(pady=10)
-
-# (Rest of your code remains unchanged)
-
 
 def create_user():
     rand_num = random.randint(100000, 999999)
@@ -97,11 +77,10 @@ def signup_page():
 
     dob = Label(form_frame, text='Date of birth:', font=('Arial', 12))
     dob.grid(row=3, column=0, padx=20, pady=10, sticky=E)
-    dob_entry = Entry(form_frame, font=('Arial', 12), width=25)  # Adjust width
+    dob_entry = Entry(form_frame, font=('Arial', 12), width=25)
     dob_entry.grid(row=3, column=1, padx=20, pady=10, sticky=W)    
     icon_btn = Button(form_frame, text="📅", font=("Arial", 12), command=open_calendar, borderwidth=0)
-    icon_btn.grid(row=3, column=2, padx=5, pady=5, sticky=W)  # Positioned next to dob_entry
-
+    icon_btn.grid(row=3, column=2, padx=5, pady=5, sticky=W)
 
     pwd = Label(form_frame, text='Password:', font=('Arial', 12))
     pwd.grid(row=4, column=0, padx=20, pady=10, sticky=E)
@@ -140,7 +119,7 @@ def signup_page():
     created_on_entry = Entry(form_frame, font=('Arial', 12), width=25)
     created_on_entry.grid(row=4, column=3, padx=20, pady=10)
     icon_btn1 = Button(form_frame, text="📅", font=("Arial", 12), command=open_calendar1, borderwidth=0)
-    icon_btn1.grid(row=4, column=5, padx=5, pady=5, sticky=W)  # Positioned next to dob_entry
+    icon_btn1.grid(row=4, column=5, padx=5, pady=5, sticky=W)
 
     format = Label(form_frame, text='(in dd-mmm-yyyy)', font=('Arial', 10))
     format.grid(row=5, column=2, padx=20, pady=10, sticky=E)
@@ -157,4 +136,4 @@ def signup_page():
     root.configure(bg='lightgrey')
     root.mainloop()
 
-signup_page()
+#signup_page()

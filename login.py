@@ -1,5 +1,7 @@
 from tkinter import *
 from tkinter import font
+from schemes import *
+
 def forgot_pwd():
     root=Tk()
     root.title('Forgot Password')
@@ -44,7 +46,7 @@ def login_page():
     pwd_entry = Entry(form_frame, font=('Arial', 12), width=25, show='*')
     pwd_entry.grid(row=1, column=1, padx=20, pady=10)
 
-    submit = Button(form_frame, text='Login', font=('Arial', 12), width=10, bg='lightblue')
+    submit = Button(form_frame, text='Login', font=('Arial', 12), width=10, bg='lightblue',command=schemes)
     submit.grid(row=2, column=0, columnspan=2, pady=20)
 
     forgot = Button(form_frame, text='Forgot Password?', font=font.Font(size=10, underline=True), borderwidth=0, fg='blue',command=forgot_pwd)

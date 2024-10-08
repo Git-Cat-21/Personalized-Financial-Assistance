@@ -1,4 +1,5 @@
 from tkinter import * 
+from transactions import *
 
 def savings_dets():
     root_savings_dets=Tk()
@@ -53,7 +54,7 @@ def savings_dets():
 
     root_savings_dets.configure(bg='lightgrey')
 
-    submit = Button(form_frame, text='Submit', font=('Arial', 12),command=root_savings_dets.destroy)
+    submit = Button(form_frame, text='Submit', font=('Arial', 12),command=transactions)
     submit.grid(row=6, column=0, columnspan=4, pady=20)
 
     root_savings_dets.mainloop()

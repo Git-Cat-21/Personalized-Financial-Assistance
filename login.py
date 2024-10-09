@@ -10,7 +10,7 @@ def forgot_pwd():
     user_id_entry = Entry(root, font=('Arial', 12), width=25)
     user_id_entry.grid(row=0, column=1, padx=20, pady=10)
 
-    pwd = Label(root, text='Password:', font=('Arial', 14))
+    pwd = Label(root, text='New Password:', font=('Arial', 14))
     pwd.grid(row=1, column=0, padx=20, pady=10, sticky=E)
     pwd_entry = Entry(root, font=('Arial', 12), width=25, show='*')
     pwd_entry.grid(row=1, column=1, padx=20, pady=10)
@@ -53,7 +53,7 @@ def login_page():
     forgot.grid(row=3, column=0, columnspan=2, pady=10)
 
     root.configure(bg='lightgrey')
-
+    #print(user_id_entry.get())
     root.mainloop()
 
 #login_page()

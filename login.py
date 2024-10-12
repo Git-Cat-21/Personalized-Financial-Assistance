@@ -2,6 +2,9 @@ from tkinter import *
 from tkinter import font
 from schemes import *
 
+def print_data():
+    print(user_id_entry.get())
+
 def forgot_pwd():
     root=Tk()
     root.title('Forgot Password')
@@ -26,6 +29,7 @@ def forgot_pwd():
     root.mainloop()
 
 def login_page():
+    global user_id_entry
     root = Tk()
     root.title("Login Page")
     root.geometry("1000x1000")
@@ -53,7 +57,6 @@ def login_page():
     forgot.grid(row=3, column=0, columnspan=2, pady=10)
 
     root.configure(bg='lightgrey')
-    #print(user_id_entry.get())
     root.mainloop()
 
 #login_page()

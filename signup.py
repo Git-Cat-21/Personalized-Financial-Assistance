@@ -43,6 +43,7 @@ def open_calendar1():
 def create_user():
     rand_num = random.randint(100000, 999999)
     user_id.config(text=f"Your user ID is: {rand_num}")
+    print(rand_num)
 
 def signup_page():
     global user_id

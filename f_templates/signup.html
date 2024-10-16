@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+</head>
+<body>
+
+    <h1>Signup Page</h1>
+    <form id="signup-form">
+
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="mobile">Mobile number:</label><br>
+        <input type="text" id="mobile" name="mobile" required><br><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="dob">Date of Birth:</label><br>
+        <input type="date" id="dob" name="dob" required><br><br>
+
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <label for="confirm_password">Confirm Password:</label><br>
+        <input type="password" id="confirm_password" name="confirm_password" required><br><br>
+
+        <label for="acc_number">Account Number:</label><br>
+        <input type="text" id="acc_number" name="acc_number" required><br><br>
+
+        <label for="ifsc">IFSC Code:</label><br>
+        <input type="text" id="ifsc" name="ifsc" required><br><br>
+
+        <label for="status">Account Status:</label><br>
+        <select id="status" name="status" required>
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+        </select><br><br>
+
+        <label for="acc_type">Account Type:</label><br>
+        <select id="acc_type" name="acc_type" required>
+            <option value="Savings">Savings</option>
+            <option value="Current">Current</option>
+        </select><br><br>
+
+        <label for="created_on">Account Created On:</label><br>
+        <input type="date" id="created_on" name="created_on" required><br><br>
+
+        <button type="button" onclick="createUser()">Signup</button>
+    </form>
+
+    <p id="user-id"></p>
+    <p><a href="/login">Return to Login Page</a></p>
+
+    <script>
+        function createUser() {
+            const userId = Math.floor(100000 + Math.random() * 900000);
+            document.getElementById("user-id").textContent = `Your user ID is: ${userId}`;
+        }
+    </script>
+
+</body>
+</html>

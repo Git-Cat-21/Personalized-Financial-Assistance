@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schemes List</title>
+</head>
+
+<body>
+    <h1>Schemes</h1>
+    <table border="1">
+        <tr>
+            <th>Scheme ID</th>
+            <th>Scheme Name</th>
+            <th>Rate of Interest</th>
+            <th>Duration in Years</th>
+        </tr>
+        <% data.forEach(function(schemes) { %>
+            <tr>
+                <td><%= schemes.Scheme_ID %></td>
+                <td><%= schemes.Scheme_Name %></td>
+                <td><%= schemes.Interest_Rate %></td>
+                <td><%= schemes.Duration_In_Years %></td>
+            </tr>
+        <% }) %>
+    </table>
+</body>
+</html>

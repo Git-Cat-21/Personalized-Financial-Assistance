@@ -8,8 +8,7 @@
 <body>
 
     <h1>Signup Page</h1>
-    <form id="signup-form">
-
+    <form id="signup-form" action="{{ url_for('signup') }}" method="POST">
         <label for="name">Name:</label><br>
         <input type="text" id="name" name="name" required><br><br>
 
@@ -49,18 +48,24 @@
         <label for="created_on">Account Created On:</label><br>
         <input type="date" id="created_on" name="created_on" required><br><br>
 
-        <button type="button" onclick="createUser()">Signup</button>
+        <input type="hidden" id="user_id" name="user_id">
+        
+        <button type="button" onclick="generateUserId()">Signup</button>
     </form>
 
-    <p id="user-id"></p>
+    <p id="display-user-id"></p>
     <p><a href="/login">Return to Login Page</a></p>
 
     <script>
-        function createUser() {
+        function generateUserId() {
+            // Generate a random user ID
             const userId = Math.floor(100000 + Math.random() * 900000);
-            document.getElementById("user-id").textContent = `Your user ID is: ${userId}`;
+            document.getElementById("display-user-id").textContent = `Your user ID is: ${userId}`;
+            document.getElementById("user_id").value = userId;
+
+            // Submit the form after setting the user ID
+            document.getElementById("signup-form").submit();
         }
     </script>
-
 </body>
 </html>

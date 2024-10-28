@@ -26,9 +26,9 @@ def login():
         username=request.form['username']
         password=request.form['password']
         #print(username,password)
-        cursor=db.cursor()
-        cursor.execute('INSERT INTO users (username, password) VALUES (%s, %s)',(username,password))
-        db.commit()
+        # cursor=db.cursor()
+        # cursor.execute('INSERT INTO user_details (username, password) VALUES (%s, %s)',(username,password))
+        # db.commit()
 
         # flash ("Correct go in")
         return redirect(url_for('index'))
@@ -38,11 +38,15 @@ def signup():
     if request.method=='GET':
         return render_template('signup.html')
     if request.method=='POST':
-        username=request.form['username']
+        data=request.get_json()
+        user_id = data.get("userId")
+        name=request.form['name']
+        mob=request.form['mobile']
+        email=request.form['email']
+        dob=request.form['dob']
         password=request.form['password']
-
         cursor=db.cursor()
-        cursor.execute('INSERT INTO users (username, password) VALUES (%s, %s)',(username,password))
+        cursor.execute('INSERT INTO user_details VALUES (%s, %s, %s, %s, %s, %s)',(user_id, name, mob, email, dob, password))
         db.commit()
 
         # flash ("Correct go in")

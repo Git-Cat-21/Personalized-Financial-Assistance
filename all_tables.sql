@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS pfa_orange;
 
 USE pfa_orange;
-drop table user_details;
+
 CREATE TABLE USER_DETAILS(
     User_ID INT PRIMARY KEY,
     User_name VARCHAR(50),
@@ -37,8 +37,7 @@ INSERT INTO schemes (Scheme_ID,Scheme_Name,Interest_Rate, Duration_In_Years) VAL
 (8,'FirstChoice Wealth FD', 7.2, 0.5),
 (9,'ValueSafe High Return FD', 6.75, 1),
 (10,'CapitalMax Booster FD', 7.1, 3);
-SELECT * FROM schemes;
-desc user_details;
+
 CREATE TABLE SAVINGS_DETAILS (
     User_ID_savings INT NOT NULL,
     Account_Number BIGINT UNIQUE NOT NULL,
@@ -53,9 +52,6 @@ CREATE TABLE SAVINGS_DETAILS (
     FOREIGN KEY (Account_Number) REFERENCES account_details(acc_no)
 );
 
-SHOW TABLES;
-
-SELECT * from user_details;
 CREATE TABLE transactions(
     Transaction_ID INT PRIMARY KEY,
     User_ID INT ,
@@ -65,3 +61,6 @@ CREATE TABLE transactions(
     Debited_Date DATE NOT NULL,
     FOREIGN KEY (User_ID) REFERENCES USER_DETAILS(User_ID)
 );
+
+desc account_details;
+SELECT* from account_details;

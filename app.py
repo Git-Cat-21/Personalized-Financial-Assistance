@@ -45,18 +45,16 @@ def signup():
         email = request.form['email']
         dob = request.form['dob']
         password = request.form['password']
-        # acc_number = request.form['acc_number']
-        # ifsc = request.form['ifsc']
-        # status = request.form['status']
-        # acc_type = request.form['acc_type']
-        # created_on = request.form['created_on']
+        acc_number = request.form['acc_number']
+        ifsc = request.form['ifsc']
+        status = request.form['status']
+        acc_type = request.form['acc_type']
+        created_on = request.form['created_on']
         
         # Insert data into the database
         cursor = db.cursor()
-        cursor.execute('''
-            INSERT INTO user_details (user_id, user_name, mob, email_id, dob, pwd)
-            VALUES (%s, %s, %s, %s, %s, %s)
-        ''', (user_id, name, mobile, email, dob, password))
+        cursor.execute('''INSERT INTO user_details (user_id, user_name, mob, email_id, dob, pwd) VALUES (%s, %s, %s, %s, %s, %s)''', (user_id, name, mobile, email, dob, password))
+        cursor.execute('''INSERT INTO account_details (acc_no, ifsc, acc_status, acc_type, acc_create, user_id) VALUES (%s, %s, %s, %s, %s, %s)''', (acc_number,ifsc,status,acc_type,created_on,user_id))
         db.commit()
         
         # Redirect to the index page or a success page

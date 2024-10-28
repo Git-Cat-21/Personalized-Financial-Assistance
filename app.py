@@ -6,7 +6,7 @@ import mysql.connector
 app=Flask(__name__,template_folder="f_templates")
 
 db=mysql.connector.connect(
-    host='localhost',
+    host="localhost",
     user="root",
     password="password",
     database="pfa_orange"
@@ -25,7 +25,7 @@ def login():
     if request.method=='POST':
         username=request.form['username']
         password=request.form['password']
-
+        #print(username,password)
         cursor=db.cursor()
         cursor.execute('INSERT INTO users (username, password) VALUES (%s, %s)',(username,password))
         db.commit()

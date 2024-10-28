@@ -55,6 +55,7 @@ CREATE TABLE SAVINGS_DETAILS (
 
 SHOW TABLES;
 
+SELECT * from users;
 CREATE TABLE transactions(
     Transaction_ID INT PRIMARY KEY,
     User_ID INT ,

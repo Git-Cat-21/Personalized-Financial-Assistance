@@ -1,11 +1,11 @@
 CREATE DATABASE IF NOT EXISTS pfa_orange;
 
 USE pfa_orange;
-
+drop table user_details;
 CREATE TABLE USER_DETAILS(
     User_ID INT PRIMARY KEY,
     User_name VARCHAR(50),
-    Mob long constraint ck1 check(Mob like '[0-9]{10}'),
+    Mob long,
     Email_id VARCHAR(30) constraint ck2 check(Email_id like '%_@__%.__%'),
     Dob DATE,
     Pwd VARCHAR(20)

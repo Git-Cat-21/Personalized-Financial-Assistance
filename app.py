@@ -33,23 +33,33 @@ def login():
         # flash ("Correct go in")
         return redirect(url_for('index'))
 
-@app.route("/signup",methods=['GET','POST'])
+@app.route("/signup", methods=['GET', 'POST'])
 def signup():
-    if request.method=='GET':
+    if request.method == 'GET':
         return render_template('signup.html')
-    if request.method=='POST':
-        data=request.get_json()
-        user_id = data.get("userId")
-        name=request.form['name']
-        mob=request.form['mobile']
-        email=request.form['email']
-        dob=request.form['dob']
-        password=request.form['password']
-        cursor=db.cursor()
-        cursor.execute('INSERT INTO user_details VALUES (%s, %s, %s, %s, %s, %s)',(user_id, name, mob, email, dob, password))
+    elif request.method == 'POST':
+        # Retrieve form data
+        user_id = request.form['user_id']
+        name = request.form['name']
+        mobile = request.form['mobile']
+        email = request.form['email']
+        dob = request.form['dob']
+        password = request.form['password']
+        # acc_number = request.form['acc_number']
+        # ifsc = request.form['ifsc']
+        # status = request.form['status']
+        # acc_type = request.form['acc_type']
+        # created_on = request.form['created_on']
+        
+        # Insert data into the database
+        cursor = db.cursor()
+        cursor.execute('''
+            INSERT INTO user_details (user_id, user_name, mob, email_id, dob, pwd)
+            VALUES (%s, %s, %s, %s, %s, %s)
+        ''', (user_id, name, mobile, email, dob, password))
         db.commit()
-
-        # flash ("Correct go in")
+        
+        # Redirect to the index page or a success page
         return redirect(url_for('index'))
 
 @app.route("/savings",methods=['GET','POST'])

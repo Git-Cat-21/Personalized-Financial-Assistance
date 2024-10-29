@@ -90,5 +90,28 @@
             </tr>
         <% }) %>
     </table>
+    <label for="Scheme_ID" >Scheme ID:</label>
+    <input type="text" id="Scheme_ID" name="Scheme_ID">
+
+    <label for="Amount" id="amt">Investment Amount</label>
+    <input type="text" id="Amount" name="Amount">
+
+    <label for="Int_Amount">Interest Amount</label>
+    <input type="text" id="Int_Amount" name="Int_Amount">
+
+    <label for="Total_Amount"> Total Amount</label>
+    <input type="text" id="Total_Amount" name="Total_Amount">
+
+    <button type="button" onclick="calculate_int()">Submit</button>
+    <script>
+        function calculate_int(){
+            let scheme_id=document.getElementById("Scheme_ID").value
+            console.log(scheme_id)
+            let amount=document.getElementById("Amount").value
+            console.log(amount)
+        }
+        
+
+    </script>
 </body>
 </html>

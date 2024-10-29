@@ -78,11 +78,16 @@ def savings():
     if request.method=='GET':
         return render_template('savings.html')
     if request.method=='POST':
-        username=request.form['username']
-        password=request.form['password']
-
+        user_id = request.form['user_id']
+        acc_no = request.form['acc_no']
+        mobile = request.form['mobile']
+        amount = request.form['amount']
+        pan = request.form['pan']
+        mat_amt = request.form['mat_amt']
+        inv_date = request.form['inv_date']
+        mat_date = request.form['mat_date']
         cursor=db.cursor()
-        cursor.execute('INSERT INTO users (username, password) VALUES (%s, %s)',(username,password))
+        cursor.execute('''INSERT INTO savings_details (user_id_savings,account_number,mobile_number,amount,pan,maturity_amount,invested_date,maturity_date) VALUES (%s, %s, %s, %s, %s, %s, %s, %s) ''',(user_id, acc_no,mobile,amount,pan,mat_amt,inv_date,mat_date))
         db.commit()
 
         # flash ("Correct go in")

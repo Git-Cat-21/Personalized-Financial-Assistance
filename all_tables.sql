@@ -62,5 +62,5 @@ CREATE TABLE transactions(
     FOREIGN KEY (User_ID) REFERENCES USER_DETAILS(User_ID)
 );
 
-desc account_details;
-SELECT* from account_details;
+desc savings_details;
+SELECT* from savings_details;

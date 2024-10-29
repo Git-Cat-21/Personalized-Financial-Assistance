@@ -32,6 +32,19 @@ def login():
 
         # flash ("Correct go in")
         return redirect(url_for('index'))
+    
+@app.route("/forgot_pwd", methods=['GET', 'POST'])
+def forgot_pwd():
+    if request.method == 'GET':
+        return render_template('forgot_pwd.html')
+    elif request.method == 'POST':
+        username = request.form['username']
+        new_password = request.form['new_password']
+        # Update password in database
+        cursor.execute('UPDATE user_details SET pwd = %s WHERE user_name = %s', (new_password, username))
+        db.commit()
+        return redirect(url_for('login'))
+    
 
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():

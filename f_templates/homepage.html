@@ -3,26 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home page</title>
+    <title>Home Page</title>
+    <style>
+        /* Global Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Header Styling */
+        .header {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px 20px;
+            box-sizing: border-box;
+            background-color: #f4f7f9;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .header a {
+            text-decoration: none;
+            font-size: 1em;
+            color: #3498db;
+            margin-left: 10px;
+            padding: 8px 15px;
+            border: 2px solid #3498db;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .header a:hover {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        /* Main Content */
+        .content {
+            text-align: center;
+            max-width: 800px;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #34495e;
+            margin-bottom: 20px;
+        }
+
+        p {
+            line-height: 1.6;
+            font-size: 1.1em;
+            color: #555;
+            margin: 20px 0;
+        }
+
+        .contact-info {
+            margin-top: 30px;
+            font-size: 1em;
+            color: #666;
+        }
+    </style>
 </head>
 <body>
-    <p>Financial Assisstance </p>
-    <a href="/login">Login Page</a><br>
-    <a href="/signup">Signup Page</a><br>
-    <a href="/savings">Savings Page</a><br>
-    <a href="http://127.0.0.1:3000/schemes">Schemes Page</a>
-    <p>About Us:
-        A financial assistance app provides users with tools and resources to manage their finances 
-        effectively. It helps track spending, set budgets, monitor savings goals, and offer personalized 
-        financial advice. The app may include features such as expense tracking, bill reminders, 
-        financial planning, and loan management. It can also provide insights into credit scores, 
-        investment opportunities, and debt reduction strategies. By integrating bank accounts and 
-        financial data, the app offers real-time analysis, helping users make informed decisions, 
-        achieve financial stability, and improve their overall financial health.
-    </p>
-    <p>Contact Us:
 
-    </p>
-    
+    <div class="header">
+        <a href="/login">Login Page</a>
+        <a href="/signup">Signup Page</a>
+        <a href="/savings">Savings Page</a>
+        <a href="http://127.0.0.1:3000/schemes">Schemes Page</a>
+    </div>
+
+    <div class="content">
+        <h1>Personalised Financial Assistance</h1>
+        <p>
+            A financial assistance app provides users with tools and resources to manage their finances 
+            effectively. It helps track spending, set budgets, monitor savings goals, and offer personalized 
+            financial advice. The app may include features such as expense tracking, bill reminders, 
+            financial planning, and loan management. It can also provide insights into credit scores, 
+            investment opportunities, and debt reduction strategies. By integrating bank accounts and 
+            financial data, the app offers real-time analysis, helping users make informed decisions, 
+            achieve financial stability, and improve their overall financial health.
+        </p>
+
+        <div class="contact-info">
+            <p>Contact Us:</p>
+            <p>Email: support@financialapp.com | Phone: +91 9342059485</p>
+        </div>
+    </div>
+
 </body>
 </html>

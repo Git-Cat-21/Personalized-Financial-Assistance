@@ -118,7 +118,6 @@
         <h1>Signup Page</h1>
         <form id="signup-form" action="{{ url_for('signup') }}" method="POST">
             <div class="form-columns">
-                <!-- Personal Details Section -->
                 <div class="form-section">
                     <label for="name">Name:</label>
                     <input type="text" id="name" name="name" required>
@@ -139,7 +138,6 @@
                     <input type="password" id="confirm_password" name="confirm_password" required>
                 </div>
 
-                <!-- Account Details Section -->
                 <div class="form-section">
                     <label for="acc_number">Account Number:</label>
                     <input type="text" id="acc_number" name="acc_number" required>
@@ -165,11 +163,9 @@
                     <input type="hidden" id="user_id" name="user_id">
                 </div>
             </div>
-            
-            <!-- Signup Button -->
+
             <button type="button" onclick="generateUserId()">Signup</button>
 
-            <!-- Return to Login Link -->
             <p><button type="button" class="return-to-login" onclick="window.location.href='/login'">Return to Login Page</button></p>
         </form>
 
@@ -178,12 +174,9 @@
 
     <script>
         function generateUserId() {
-            // Generate a random user ID
             const userId = Math.floor(100000 + Math.random() * 900000);
             document.getElementById("display-user-id").textContent = `Your user ID is: ${userId}`;
             document.getElementById("user_id").value = userId;
-
-            // Submit the form after setting the user ID
             document.getElementById("signup-form").submit();
         }
     </script>

@@ -41,7 +41,7 @@ def forgot_pwd():
         username = request.form['username']
         new_password = request.form['new_password']
         # Update password in database
-        cursor.execute('UPDATE user_details SET pwd = %s WHERE user_name = %s', (new_password, username))
+        cursor.execute('UPDATE user_details SET pwd = %s WHERE user_id = %s', (new_password, username))
         db.commit()
         return redirect(url_for('login'))
     

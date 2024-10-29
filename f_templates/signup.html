@@ -4,57 +4,177 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup Page</title>
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* Container styling */
+        .container {
+            max-width: 800px;
+            width: 100%;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #34495e;
+            font-size: 2em;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        /* Form styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Columns styling */
+        .form-columns {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .form-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #34495e;
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        /* Button styling */
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #34495e;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #2c3e50;
+        }
+
+        /* Link styling similar to "Forgot Password" button */
+        .return-to-login {
+            background-color: transparent;
+            color: #34495e;
+            border: none;
+            text-decoration: underline;
+            font-weight: normal;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* Prevent hover color change */
+        .return-to-login:hover {
+            color: #34495e;
+        }
+    </style>
 </head>
 <body>
 
-    <h1>Signup Page</h1>
-    <form id="signup-form" action="{{ url_for('signup') }}" method="POST">
-        <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name" required><br><br>
+    <div class="container">
+        <h1>Signup Page</h1>
+        <form id="signup-form" action="{{ url_for('signup') }}" method="POST">
+            <div class="form-columns">
+                <!-- Personal Details Section -->
+                <div class="form-section">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
 
-        <label for="mobile">Mobile number:</label><br>
-        <input type="text" id="mobile" name="mobile" required><br><br>
+                    <label for="mobile">Mobile number:</label>
+                    <input type="text" id="mobile" name="mobile" required>
 
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" required><br><br>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
 
-        <label for="dob">Date of Birth:</label><br>
-        <input type="date" id="dob" name="dob" required><br><br>
+                    <label for="dob">Date of Birth:</label>
+                    <input type="date" id="dob" name="dob" required>
 
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password" required><br><br>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
 
-        <label for="confirm_password">Confirm Password:</label><br>
-        <input type="password" id="confirm_password" name="confirm_password" required><br><br>
+                    <label for="confirm_password">Confirm Password:</label>
+                    <input type="password" id="confirm_password" name="confirm_password" required>
+                </div>
 
-        <label for="acc_number">Account Number:</label><br>
-        <input type="text" id="acc_number" name="acc_number" required><br><br>
+                <!-- Account Details Section -->
+                <div class="form-section">
+                    <label for="acc_number">Account Number:</label>
+                    <input type="text" id="acc_number" name="acc_number" required>
 
-        <label for="ifsc">IFSC Code:</label><br>
-        <input type="text" id="ifsc" name="ifsc" required><br><br>
+                    <label for="ifsc">IFSC Code:</label>
+                    <input type="text" id="ifsc" name="ifsc" required>
 
-        <label for="status">Account Status:</label><br>
-        <select id="status" name="status" required>
-            <option value="Active">Active</option>
-            <option value="Inactive">Inactive</option>
-        </select><br><br>
+                    <label for="status">Account Status:</label>
+                    <select id="status" name="status" required>
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                    </select>
 
-        <label for="acc_type">Account Type:</label><br>
-        <select id="acc_type" name="acc_type" required>
-            <option value="Savings">Savings</option>
-            <option value="Current">Current</option>
-        </select><br><br>
+                    <label for="acc_type">Account Type:</label>
+                    <select id="acc_type" name="acc_type" required>
+                        <option value="Savings">Savings</option>
+                        <option value="Current">Current</option>
+                    </select>
 
-        <label for="created_on">Account Created On:</label><br>
-        <input type="date" id="created_on" name="created_on" required><br><br>
+                    <label for="created_on">Account Created On:</label>
+                    <input type="date" id="created_on" name="created_on" required>
 
-        <input type="hidden" id="user_id" name="user_id">
-        
-        <button type="button" onclick="generateUserId()">Signup</button>
-    </form>
+                    <input type="hidden" id="user_id" name="user_id">
+                </div>
+            </div>
+            
+            <!-- Signup Button -->
+            <button type="button" onclick="generateUserId()">Signup</button>
 
-    <p id="display-user-id"></p>
-    <p><a href="/login">Return to Login Page</a></p>
+            <!-- Return to Login Link -->
+            <p><button type="button" class="return-to-login" onclick="window.location.href='/login'">Return to Login Page</button></p>
+        </form>
+
+        <p id="display-user-id"></p>
+    </div>
 
     <script>
         function generateUserId() {

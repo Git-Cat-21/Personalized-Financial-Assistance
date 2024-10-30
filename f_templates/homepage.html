@@ -28,7 +28,7 @@
             border-bottom: 1px solid #ddd;
         }
 
-        .header a {
+        .header a, .header button {
             text-decoration: none;
             font-size: 1em;
             color: white;
@@ -38,10 +38,11 @@
             border: 2px solid #3498db;
             border-radius: 5px;
             transition: background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer; /* Change cursor to pointer for buttons */
         }
 
-        .header a:hover {
-            background-color: #3498db;
+        .header a:hover, .header button:hover {
+            background-color: #2980b9; /* Darker shade on hover */
             color: #fff;
         }
 
@@ -50,7 +51,7 @@
             text-align: center;
             max-width: 800px;
             padding: 20px;
-            margin-top: 50px;
+            margin-top: 20px; /* Adjusted for spacing */
         }
 
         h1 {
@@ -71,19 +72,90 @@
             font-size: 1em;
             color: #666;
         }
+
+        /* Slideshow styles */
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            margin: auto;
+            overflow: hidden;
+            background-color: #fff; /* Background for the text area */
+            padding: 20px; /* Padding for text */
+            border-radius: 5px; /* Rounded corners */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
+        }
+
+        .text-slide {
+            display: none;
+            font-size: 1.5em; /* Text size */
+            color: #34495e; /* Text color */
+            text-align: center;
+        }
+
+        /* Dots */
+        .dot {
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        .active {
+            background-color: #717171;
+        }
+
+        /* Hide the dot by default */
+        .fade {
+            animation: fade 1.5s;
+        }
+
+        @keyframes fade {
+            from { opacity: .4; }
+            to { opacity: 1; }
+        }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <a href="/login">Login</a>
-        <a href="/signup">Signup</a>
+        {% if session.get('username') %}
+            <button id="userButton">{{ session['username'] }}</button>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+            <a href="/login">Login</a>
+            <a href="/signup">Signup</a>
+        {% endif %}
         <a href="/savings">Savings Page</a>
         <a href="http://127.0.0.1:3000/schemes">Schemes</a>
     </div>
 
     <div class="content">
         <h1>Personalised Financial Assistance</h1>
+        
+        <!-- Slideshow -->
+        <div class="slideshow-container">
+            <div class="text-slide fade">
+                <p>Manage your finances effectively with our app!</p>
+            </div>
+            <div class="text-slide fade">
+                <p>Track your spending and set budgets easily.</p>
+            </div>
+            <div class="text-slide fade">
+                <p>Get personalized financial advice tailored to your needs.</p>
+            </div>
+        </div>
+
+        <br>
+
+        <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+
         <p>
             A financial assistance app provides users with tools and resources to manage their finances 
             effectively. It helps track spending, set budgets, monitor savings goals, and offer personalized 
@@ -99,6 +171,37 @@
             <p>Email: support@financialapp.com | Phone: +91 9342059485</p>
         </div>
     </div>
+
+    <script>
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("text-slide");
+            let dots = document.getElementsByClassName("dot");
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";  
+            dots[slideIndex - 1].className += " active";
+        }
+
+        // Automatic slideshow
+        setInterval(() => {
+            slideIndex++;
+            showSlides(slideIndex);
+        }, 3000); // Change text every 3 seconds
+    </script>
 
 </body>
 </html>

@@ -1,9 +1,9 @@
-from flask import Flask,render_template,request,url_for,redirect
+from flask import Flask,render_template,request,url_for,redirect, flash, session
 import mysql.connector
 
 #what is secret key used for check??
-
 app=Flask(__name__,template_folder="f_templates")
+app.secret_key = "77d48e2e153c7796b4bdd39598f9935b6165f26ff8e1eb3b"
 
 db=mysql.connector.connect(
     host="localhost",
@@ -18,20 +18,38 @@ cursor = db.cursor()
 def index():
     return render_template('homepage.html')
 
-@app.route("/login",methods=['GET','POST'])
+@app.route("/login", methods=['GET', 'POST'])
 def login():
-    if request.method=='GET':
+    if request.method == 'GET':
         return render_template('login.html')
-    if request.method=='POST':
-        username=request.form['username']
-        password=request.form['password']
-        #print(username,password)
-        # cursor=db.cursor()
-        # cursor.execute('INSERT INTO user_details (username, password) VALUES (%s, %s)',(username,password))
-        # db.commit()
 
-        # flash ("Correct go in")
-        return redirect(url_for('index'))
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        
+        cursor = db.cursor(dictionary=True)
+        cursor.execute('SELECT * FROM user_details WHERE user_id = %s', (username,))
+        user = cursor.fetchone()
+        print(user)
+        if user and  password:  
+            session['username'] = user['User_name']
+            flash("Login successful!", "success")
+            return redirect(url_for('index'))
+        else:
+            flash("Invalid username or password.", "danger")
+            return redirect(url_for('login'))
+
+@app.route("/logout")
+def logout():
+    session.pop('username', None)  # Remove username from session
+    flash("You have been logged out.", "success")
+    return redirect(url_for('index'))
+
+
+@app.route("/")
+def home():
+    return render_template('home.html')  # This is your main page with user check
+     
     
 @app.route("/forgot_pwd", methods=['GET', 'POST'])
 def forgot_pwd():

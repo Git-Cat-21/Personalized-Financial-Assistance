@@ -31,7 +31,7 @@ def login():
         cursor.execute('SELECT * FROM user_details WHERE user_id = %s', (username,))
         user = cursor.fetchone()
         print(user)
-        if user and  password:  
+        if user and password:  
             session['username'] = user['User_name']
             flash("Login successful!", "success")
             return redirect(url_for('index'))
@@ -90,15 +90,15 @@ def savings():
         return render_template('savings.html')
     if request.method=='POST':
         user_id = request.form['user_id']
-        acc_no = request.form['acc_no']
         mobile = request.form['mobile']
+        scheme_id = request.form['scheme_id']
+        acc_no = request.form['acc_no']
         amount = request.form['amount']
         pan = request.form['pan']
         mat_amt = request.form['mat_amt']
         inv_date = request.form['inv_date']
-        mat_date = request.form['mat_date']
         cursor=db.cursor()
-        cursor.execute('''INSERT INTO savings_details (user_id_savings,account_number,mobile_number,amount,pan,maturity_amount,invested_date,maturity_date) VALUES (%s, %s, %s, %s, %s, %s, %s, %s) ''',(user_id, acc_no,mobile,amount,pan,mat_amt,inv_date,mat_date))
+        cursor.execute('''INSERT INTO savings_details (user_id_savings,account_number,mobile_number,amount,pan,maturity_amount,invested_date,maturity_date) VALUES (%s, %s, %s, %s, %s, %s, %s, %s) ''',(user_id, acc_no,mobile,amount,pan,mat_amt,inv_date))
         db.commit()
 
         # flash ("Correct go in")

@@ -43,13 +43,7 @@ def login():
 def logout():
     session.pop('username', None)  # Remove username from session
     flash("You have been logged out.", "success")
-    return redirect(url_for('index'))
-
-
-@app.route("/")
-def home():
-    return render_template('home.html')  # This is your main page with user check
-     
+    return redirect(url_for('index'))     
     
 @app.route("/forgot_pwd", methods=['GET', 'POST'])
 def forgot_pwd():
@@ -63,7 +57,6 @@ def forgot_pwd():
         db.commit()
         return redirect(url_for('login'))
     
-
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():
     if request.method == 'GET':

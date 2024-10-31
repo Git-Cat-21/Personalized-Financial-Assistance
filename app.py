@@ -26,13 +26,12 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        
-        cursor = db.cursor(dictionary=True)
-        cursor.execute('SELECT * FROM user_details WHERE user_id = %s', (username,))
+        cursor = db.cursor()
+        cursor.execute('SELECT User_ID, Pwd, User_name FROM user_details WHERE User_ID = %s', (username,))
         user = cursor.fetchone()
-        print(user)
-        if user and password:  
-            session['username'] = user['User_name']
+        print("Retrieved user data:", user)
+        if user and user[1] == password:  
+            session['username'] = user[2]  
             flash("Login successful!", "success")
             return redirect(url_for('index'))
         else:
@@ -90,15 +89,14 @@ def savings():
         return render_template('savings.html')
     if request.method=='POST':
         user_id = request.form['user_id']
+        acc_no = request.form['acc_no']
         mobile = request.form['mobile']
         scheme_id = request.form['scheme_id']
-        acc_no = request.form['acc_no']
         amount = request.form['amount']
         pan = request.form['pan']
-        mat_amt = request.form['mat_amt']
         inv_date = request.form['inv_date']
         cursor=db.cursor()
-        cursor.execute('''INSERT INTO savings_details (user_id_savings,account_number,mobile_number,amount,pan,maturity_amount,invested_date,maturity_date) VALUES (%s, %s, %s, %s, %s, %s, %s, %s) ''',(user_id, acc_no,mobile,amount,pan,mat_amt,inv_date))
+        cursor.execute('''INSERT INTO savings_details (user_id_savings,account_number,mobile_number,Scheme_ID,amount,pan,invested_date) VALUES (%s, %s, %s, %s, %s, %s, %s) ''',(user_id, acc_no,mobile,scheme_id,amount,pan,inv_date))
         db.commit()
 
         # flash ("Correct go in")

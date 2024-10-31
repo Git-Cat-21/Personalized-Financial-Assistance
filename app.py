@@ -82,7 +82,7 @@ def signup():
         db.commit()
         
         # Redirect to the index page or a success page
-        return redirect(url_for('index'))
+        return redirect(url_for('login'))
 
 @app.route("/savings",methods=['GET','POST'])
 def savings():

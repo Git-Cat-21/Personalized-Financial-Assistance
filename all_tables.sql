@@ -63,4 +63,12 @@ CREATE TABLE transactions(
 );
 
 desc savings_details;
-SELECT* from user_details;
+SELECT * from user_details;
+
+-- if you run into an error saying ck1 constraint is violated please run the following commands 
+
+-- SET FOREIGN_KEY_CHECKS = 0;
+
+-- ALTER TABLE user_details DROP CONSTRAINT ck1;
+
+-- SET FOREIGN_KEY_CHECKS = 1;

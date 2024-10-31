@@ -69,7 +69,58 @@
             border: none;
         }
 
-        
+        form {
+            width: 80%;
+            max-width: 600px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #34495e;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.2s ease-in;
+        }
+
+        input[type="text"]:disabled {
+            background-color: #f4f4f4;
+            cursor: not-allowed;
+        }
+
+        input[type="text"]:focus {
+            border-color: #34495e;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #34495e;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in;
+        }
+
+        button:hover {
+            background-color: #2c3e50;
+        }
 
     </style>
 </head>
@@ -128,9 +179,8 @@
             let int_amt=amount*(rate[j]/100)*duration[j];
             let tot_amt=int_amt+amount
             console.log(int_amt,tot_amt)
-            document.getElementById("Int_Amount").value=int_amt;
-            document.getElementById("Total_Amount").value=tot_amt;
-
+            document.getElementById("Int_Amount").value=int_amt.toFixed(2);
+            document.getElementById("Total_Amount").value=tot_amt.toFixed(2);
         }
 
     </script>

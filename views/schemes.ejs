@@ -69,6 +69,8 @@
             border: none;
         }
 
+        
+
     </style>
 </head>
 
@@ -90,6 +92,7 @@
             </tr>
         <% }) %>
     </table>
+    <form>
     <label for="Scheme_ID" >Scheme ID:</label>
     <input type="text" id="Scheme_ID" name="Scheme_ID">
 
@@ -97,20 +100,38 @@
     <input type="text" id="Amount" name="Amount">
 
     <label for="Int_Amount">Interest Amount</label>
-    <input type="text" id="Int_Amount" name="Int_Amount">
+    <input type="text" id="Int_Amount" name="Int_Amount" disabled>
 
     <label for="Total_Amount"> Total Amount</label>
-    <input type="text" id="Total_Amount" name="Total_Amount">
+    <input type="text" id="Total_Amount" name="Total_Amount" disabled>
 
-    <button type="button" onclick="calculate_int()">Submit</button>
+    <button type="button" onclick="calculate_int()">Calculate</button>
+</form>
     <script>
+        id=[1,2,3,4,5,6,7,8,9,10]
+        rate=[6.5,7,7.5,6.8,8,8.2,5,7.2,6.75,7.1]
+        duration=[1,2,5,3,1.5,10,6,0.5,1,3]
+
         function calculate_int(){
+            
             let scheme_id=document.getElementById("Scheme_ID").value
             console.log(scheme_id)
-            let amount=document.getElementById("Amount").value
-            console.log(amount)
+            let j;
+            for (let i=0;i<10;i++){
+                if (id[i]==scheme_id){
+                    j=i
+                    break
+                }
+            }
+            let amount=parseFloat(document.getElementById("Amount").value);
+            
+            let int_amt=amount*(rate[j]/100)*duration[j];
+            let tot_amt=int_amt+amount
+            console.log(int_amt,tot_amt)
+            document.getElementById("Int_Amount").value=int_amt;
+            document.getElementById("Total_Amount").value=tot_amt;
+
         }
-        
 
     </script>
 </body>

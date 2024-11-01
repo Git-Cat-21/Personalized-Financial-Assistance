@@ -33,17 +33,21 @@ def login():
         if user and user[1] == password:  
             session['username'] = user[2]  
             flash("Login successful!", "success")
-            return redirect(url_for('index'))
+            return redirect('index')
         else:
             flash("Invalid username or password.", "danger")
-            return redirect(url_for('login'))
+            return redirect('login')
 
 @app.route("/logout")
 def logout():
     session.pop('username', None)  # Remove username from session
     flash("You have been logged out.", "success")
-    return redirect(url_for('index'))     
-    
+    return redirect('index')     
+
+@app.route("/schemes")
+def schemes():
+    return redirect("http://127.0.0.1:3000/schemes")
+
 @app.route("/forgot_pwd", methods=['GET', 'POST'])
 def forgot_pwd():
     if request.method == 'GET':
@@ -54,7 +58,7 @@ def forgot_pwd():
         # Update password in database
         cursor.execute('UPDATE user_details SET pwd = %s WHERE user_id = %s', (new_password, username))
         db.commit()
-        return redirect(url_for('login'))
+        return redirect('login')
     
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():
@@ -82,9 +86,9 @@ def signup():
             db.commit()
         else:
             flash("Password and Confirm password should be same","danger")
-            return redirect(url_for('signup'))
+            return redirect('signup')
         # Redirect to the index page or a success page
-        return redirect(url_for('login'))
+        return redirect('login')
 
 @app.route("/savings",methods=['GET','POST'])
 def savings():
@@ -103,7 +107,7 @@ def savings():
         db.commit()
 
         # flash ("Correct go in")
-        return redirect(url_for('index'))
+        return redirect('index')
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',debug=True)

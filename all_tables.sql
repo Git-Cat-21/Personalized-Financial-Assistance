@@ -63,4 +63,5 @@ CREATE TABLE transactions(
 );
 
 desc savings_details;
-SELECT* from user_details;
+SELECT* from user_details ;
+DELETE from user_details;

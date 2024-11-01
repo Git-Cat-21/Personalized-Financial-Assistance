@@ -76,18 +76,21 @@ def signup():
         email = request.form['email']
         dob = request.form['dob']
         password = request.form['password']
+        conf_pwd = request.form['confirm_password']
         acc_number = request.form['acc_number']
         ifsc = request.form['ifsc']
         status = request.form['status']
         acc_type = request.form['acc_type']
         created_on = request.form['created_on']
-        
+        if password == conf_pwd:
         # Insert data into the database
-        cursor = db.cursor()
-        cursor.execute('''INSERT INTO user_details (user_id, user_name, mob, email_id, dob, pwd) VALUES (%s, %s, %s, %s, %s, %s)''', (user_id, name, mobile, email, dob, password))
-        cursor.execute('''INSERT INTO account_details (acc_no, ifsc, acc_status, acc_type, acc_create, user_id) VALUES (%s, %s, %s, %s, %s, %s)''', (acc_number,ifsc,status,acc_type,created_on,user_id))
-        db.commit()
-        
+            cursor = db.cursor()
+            cursor.execute('''INSERT INTO user_details (user_id, user_name, mob, email_id, dob, pwd) VALUES (%s, %s, %s, %s, %s, %s)''', (user_id, name, mobile, email, dob, password))
+            cursor.execute('''INSERT INTO account_details (acc_no, ifsc, acc_status, acc_type, acc_create, user_id) VALUES (%s, %s, %s, %s, %s, %s)''', (acc_number,ifsc,status,acc_type,created_on,user_id))
+            db.commit()
+        else:
+            flash("Password and Confirm password should be same","danger")
+            return redirect(url_for('signup'))
         # Redirect to the index page or a success page
         return redirect(url_for('index'))
 

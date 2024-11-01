@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Savings Details</title>
     <link rel="stylesheet" href="{{url_for('static',filename='css/savings.css')}}">
@@ -9,6 +10,18 @@
 <body>
     <div class="container">
         <h1>Savings Details</h1>
+        <div class="button-wrapper">
+            <button id="myButton">My Transaction History</button>
+        </div>
+        
+        <div id="myPopup" class="popup">
+            <div class="popup-content">
+                <h1 style="color:green">Transaction History</h1>
+                <p>This is your transaction History</p>
+                <button id="closePopup">Close</button>
+            </div>
+        </div>
+
         <form id="savings-form" method="POST" action="{{url_for('savings')}}">
             <label for="user_id">User ID:</label>
             <input type="text" id="user_id" name="user_id" required><br>
@@ -35,9 +48,21 @@
         </form>
     </div>
     <script>
+        document.getElementById("myButton").addEventListener("click",function(){
+            myPopup.classList.add("show");
+        });
+        document.getElementById("closePopup").addEventListener("click",function(){
+            myPopup.classList.remove("show");
+        });
+        window.addEventListener("click",function(event){
+            if(event.target==myPopup){
+                myPopup.classList.remove("show");
+            }
+        });
         document.getElementById("savings-form").onsubmit = function() {
             alert("Form submitted!");
         };
+
     </script>
 </body>
 </html>

@@ -44,9 +44,9 @@ CREATE TABLE SAVINGS_DETAILS (
     Mobile_Number BIGINT UNIQUE NOT NULL, -- Ensuring it's a 10-digit number
     Amount FLOAT NOT NULL,
     PAN CHAR(10) UNIQUE NOT NULL,
-    Maturity_Amount FLOAT NOT NULL,
+    Maturity_Amount FLOAT,
     Invested_Date DATE NOT NULL,
-    Maturity_Date DATE NOT NULL,
+    Maturity_Date DATE,
     PRIMARY KEY (User_ID_savings, Account_Number),
     FOREIGN KEY (User_ID_savings) REFERENCES user_details(User_ID),
     FOREIGN KEY (Account_Number) REFERENCES account_details(acc_no)
@@ -63,5 +63,4 @@ CREATE TABLE transactions(
 );
 
 desc savings_details;
-SELECT* from user_details ;
-DELETE from user_details;
+SELECT* from user_details;

@@ -26,13 +26,12 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        
-        cursor = db.cursor(dictionary=True)
-        cursor.execute('SELECT * FROM user_details WHERE user_id = %s', (username,))
+        cursor = db.cursor()
+        cursor.execute('SELECT User_ID, Pwd, User_name FROM user_details WHERE User_ID = %s', (username,))
         user = cursor.fetchone()
-        print(user)
-        if user and  password:  
-            session['username'] = user['User_name']
+        print("Retrieved user data:", user)
+        if user and user[1] == password:  
+            session['username'] = user[2]  
             flash("Login successful!", "success")
             return redirect(url_for('index'))
         else:
@@ -43,13 +42,7 @@ def login():
 def logout():
     session.pop('username', None)  # Remove username from session
     flash("You have been logged out.", "success")
-    return redirect(url_for('index'))
-
-
-@app.route("/")
-def home():
-    return render_template('home.html')  # This is your main page with user check
-     
+    return redirect(url_for('index'))     
     
 @app.route("/forgot_pwd", methods=['GET', 'POST'])
 def forgot_pwd():
@@ -63,7 +56,6 @@ def forgot_pwd():
         db.commit()
         return redirect(url_for('login'))
     
-
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():
     if request.method == 'GET':
@@ -92,7 +84,7 @@ def signup():
             flash("Password and Confirm password should be same","danger")
             return redirect(url_for('signup'))
         # Redirect to the index page or a success page
-        return redirect(url_for('index'))
+        return redirect(url_for('login'))
 
 @app.route("/savings",methods=['GET','POST'])
 def savings():
@@ -102,13 +94,12 @@ def savings():
         user_id = request.form['user_id']
         acc_no = request.form['acc_no']
         mobile = request.form['mobile']
+        scheme_id = request.form['scheme_id']
         amount = request.form['amount']
         pan = request.form['pan']
-        mat_amt = request.form['mat_amt']
         inv_date = request.form['inv_date']
-        mat_date = request.form['mat_date']
         cursor=db.cursor()
-        cursor.execute('''INSERT INTO savings_details (user_id_savings,account_number,mobile_number,amount,pan,maturity_amount,invested_date,maturity_date) VALUES (%s, %s, %s, %s, %s, %s, %s, %s) ''',(user_id, acc_no,mobile,amount,pan,mat_amt,inv_date,mat_date))
+        cursor.execute('''INSERT INTO savings_details (user_id_savings,account_number,mobile_number,Scheme_ID,amount,pan,invested_date) VALUES (%s, %s, %s, %s, %s, %s, %s) ''',(user_id, acc_no,mobile,scheme_id,amount,pan,inv_date))
         db.commit()
 
         # flash ("Correct go in")

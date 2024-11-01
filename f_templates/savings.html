@@ -60,7 +60,9 @@
             }
         });
         document.getElementById("savings-form").onsubmit = function() {
-            alert("Form submitted!");
+            const transId = Math.floor(1000000000000 + Math.random() * 9000000000000);
+            alert("Form submitted successfully! Your transaction (ID: " + transId + ") was completed.");
+
         };
 
     </script>

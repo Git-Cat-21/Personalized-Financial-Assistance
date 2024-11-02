@@ -88,7 +88,7 @@ def signup():
             flash("Password and Confirm password should be same","danger")
             return redirect('signup')
         # Redirect to the index page or a success page
-        return redirect('index')
+        return redirect('login')
 
 @app.route("/savings",methods=['GET','POST'])
 def savings():

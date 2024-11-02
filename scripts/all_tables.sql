@@ -38,7 +38,7 @@ INSERT INTO schemes (Scheme_ID,Scheme_Name,Interest_Rate, Duration_In_Years) VAL
 (8,'FirstChoice Wealth FD', 7.2, 0.5),
 (9,'ValueSafe High Return FD', 6.75, 1),
 (10,'CapitalMax Booster FD', 7.1, 3);
-drop table savings_details;
+DROP TABLE savings_details;
 CREATE TABLE SAVINGS_DETAILS (
     User_ID_savings INT NOT NULL,
     Account_Number BIGINT UNIQUE NOT NULL,
@@ -48,8 +48,10 @@ CREATE TABLE SAVINGS_DETAILS (
     Maturity_Amount FLOAT,
     Invested_Date DATE NOT NULL,
     Maturity_Date DATE,
+    Scheme_ID INT NOT NULL,
     FOREIGN KEY (User_ID_savings) REFERENCES user_details(User_ID),
-    FOREIGN KEY (Account_Number) REFERENCES account_details(acc_no)
+    FOREIGN KEY (Account_Number) REFERENCES account_details(acc_no),
+    FOREIGN KEY (Scheme_ID) REFERENCES schemes(Scheme_ID)
 );
 
 CREATE TABLE transactions(
@@ -68,4 +70,5 @@ SELECT* FROM user_details;
 SELECT* FROM savings_details;
 SELECT* FROM transactions;
 
-SHOW TABLEs;
+DELETE from savings_details;
+SHOW TABLES;

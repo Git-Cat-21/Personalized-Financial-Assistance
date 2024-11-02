@@ -41,7 +41,7 @@ body {
 /* Main Content */
 .content {
     text-align: center;
-    max-width: 800px;
+    max-width: 1500px;
     padding: 20px;
     margin-top: 20px; /* Adjusted for spacing */
 }
@@ -66,14 +66,14 @@ p {
 }
 
 /* Slideshow styles */
+/* Slideshow styles */
 .slideshow-container {
     position: relative;
-    max-width: 100%;
-    margin: auto;
+    width: 95vw; /* Full width */
+    margin: 0; /* Remove default margin */
     overflow: hidden;
     background-color: #fff; /* Background for the text area */
-    padding: 20px; /* Padding for text */
-    border-radius: 5px; /* Rounded corners */
+    border-radius: 0; /* Remove rounded corners for edge-to-edge look */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
 }
 
@@ -82,7 +82,9 @@ p {
     font-size: 1.5em; /* Text size */
     color: #34495e; /* Text color */
     text-align: center;
+    padding: 20px; /* Padding inside each slide */
 }
+
 
 /* Dots */
 .dot {

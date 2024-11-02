@@ -88,7 +88,7 @@ def signup():
             flash("Password and Confirm password should be same","danger")
             return redirect('signup')
         # Redirect to the index page or a success page
-        return redirect('/')
+        return redirect('index')
 
 @app.route("/savings",methods=['GET','POST'])
 def savings():
@@ -106,12 +106,12 @@ def savings():
         print(trans_id)
         cursor=db.cursor()
         cursor.execute('''INSERT INTO savings_details (user_id_savings,account_number,mobile_number,Scheme_ID,amount,pan,invested_date) VALUES (%s, %s, %s, %s, %s, %s, %s) ''',(user_id, acc_no,mobile,scheme_id,amount,pan,inv_date))
-        cursor.execute('''INSERT INTO transactions (Transaction_ID, User_ID) VALUES (%s, %s) ''',(trans_id,user_id))
+        cursor.execute('''INSERT INTO transactions(Transaction_ID,User_ID,Debit_Amount,Debit_Date) VALUES (%s,%s,%s,%s)''',(trans_id,user_id,amount,inv_date))
         db.commit()
 
         # flash ("Correct go in")
-        return redirect('/schemes')
-
+        return redirect('schemes')
+    
 if __name__ == "__main__":
     app.run(host='0.0.0.0',debug=True)
 

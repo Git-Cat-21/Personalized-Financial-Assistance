@@ -59,9 +59,9 @@ CREATE TABLE SAVINGS_DETAILS (
 CREATE TABLE transactions(
     Transaction_ID BIGINT PRIMARY KEY,
     User_ID INT ,
-    Credited_Amount FLOAT ,
-    Credited_Date DATE ,
-    Debited_Amount FLOAT ,
-    Debited_Date DATE ,
+    Credit_Amount FLOAT ,
+    Credit_Date DATE ,
+    Debit_Amount FLOAT ,
+    Debit_Date DATE ,
     FOREIGN KEY (User_ID) REFERENCES USER_DETAILS(User_ID)
 );

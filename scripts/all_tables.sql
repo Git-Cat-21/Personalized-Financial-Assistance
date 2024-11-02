@@ -91,3 +91,26 @@ SELECT* FROM transactions;
 DROP TABLE transactions;
 DELETE from user_details;
 SHOW TABLES;
+
+DELIMITER //
+
+CREATE FUNCTION calc_int_amt(amount FLOAT, scheme_id INT)
+RETURNS DECIMAL(10, 2)
+DETERMINISTIC
+BEGIN
+    DECLARE mat_amt1 DECIMAL(10, 2);
+    DECLARE int_rate FLOAT;
+    DECLARE years FLOAT;
+    
+    -- Add LIMIT 1 to ensure only one row is returned
+    SELECT Interest_Rate, Duration_In_Years 
+    INTO int_rate, years 
+    FROM schemes 
+    WHERE Scheme_ID = scheme_id 
+    LIMIT 1;
+
+    -- Calculate the maturity amount
+    SET mat_amt1 = amount + (amount * int_rate * years / 100);
+    
+    RETURN mat_amt1;
+END//

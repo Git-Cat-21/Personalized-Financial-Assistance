@@ -1,5 +1,6 @@
 from flask import Flask,render_template,request,url_for,redirect, flash, session
 import mysql.connector
+from time import sleep
 
 #what is secret key used for check??
 app=Flask(__name__,template_folder="f_templates")
@@ -108,7 +109,11 @@ def savings():
         result=cursor.fetchone()
         print(result)
         if result:
-            cursor.execute('''INSERT INTO savings_details (user_id_savings,account_number,mobile_number,Scheme_ID,amount,pan,invested_date) VALUES (%s, %s, %s, %s, %s, %s, %s) ''',(user_id, result[1],result[0],scheme_id,amount,result[2],inv_date))
+            cursor.execute('''SELECT calc_int_amt(%s,%s)''',(amount,scheme_id))
+            mat_amt=cursor.fetchone()[0]
+            cursor.execute('''INSERT INTO savings_details (user_id_savings,account_number,mobile_number,Scheme_ID,amount,pan,Maturity_Amount,invested_date) VALUES (%s, %s, %s, %s, %s, %s, %s,%s) ''',(user_id, result[1],result[0],scheme_id,amount,result[2],mat_amt,inv_date))
+            db.commit()
+            cursor=db.cursor()
             cursor.execute('''INSERT INTO transactions(Transaction_ID,User_ID,Debit_Amount,Debit_Date) VALUES (%s,%s,%s,%s)''',(trans_id,user_id,amount,inv_date))
             db.commit()
             return redirect('schemes')

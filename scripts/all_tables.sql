@@ -65,16 +65,3 @@ CREATE TABLE transactions(
     Debited_Date DATE ,
     FOREIGN KEY (User_ID) REFERENCES USER_DETAILS(User_ID)
 );
-
-desc savings_details;
-desc account_details;
-DESC user_details;
-
-desc transactions;
-SELECT* from account_details;
-SELECT* FROM user_details;
-SELECT* FROM savings_details;
-SELECT* FROM transactions;
-DROP TABLE transactions;
-DELETE from user_details;
-SHOW TABLES;

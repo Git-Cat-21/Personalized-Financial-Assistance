@@ -72,7 +72,7 @@ button.forgot-password {
     text-decoration: underline;
     font-weight: normal;
     margin-top: 5px;
-    margin-bottom: 15px;
+    margin-bottom: -15px;
     cursor: pointer;
 }
 

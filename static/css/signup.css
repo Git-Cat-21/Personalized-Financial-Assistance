@@ -94,7 +94,7 @@ button:hover {
     text-decoration: underline;
     font-weight: normal;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: -10px;
 }
 
 /* Remove hover effect for return-to-login button */

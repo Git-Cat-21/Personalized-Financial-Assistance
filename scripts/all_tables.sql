@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS pfa_orange;
 
 USE pfa_orange;
-
+show TABLEs;
 
 CREATE TABLE USER_DETAILS(
     User_ID INT PRIMARY KEY,
@@ -12,7 +12,8 @@ CREATE TABLE USER_DETAILS(
     Pwd VARCHAR(20)
 );
 CREATE TABLE ACCOUNT_DETAILS(
-    acc_no BIGINT PRIMARY KEY,
+    SI_no INT PRIMARY KEY AUTO_INCREMENT,
+    acc_no BIGINT UNIQUE,
     ifsc VARCHAR(20),
     acc_status ENUM('Active','Inactive'),
     acc_type ENUM('Savings','Current'),
@@ -38,13 +39,14 @@ INSERT INTO schemes (Scheme_ID,Scheme_Name,Interest_Rate, Duration_In_Years) VAL
 (8,'FirstChoice Wealth FD', 7.2, 0.5),
 (9,'ValueSafe High Return FD', 6.75, 1),
 (10,'CapitalMax Booster FD', 7.1, 3);
-DROP TABLE savings_details;
+
 CREATE TABLE SAVINGS_DETAILS (
+    SI_no INT PRIMARY KEY AUTO_INCREMENT,
     User_ID_savings INT NOT NULL,
-    Account_Number BIGINT UNIQUE NOT NULL,
-    Mobile_Number BIGINT UNIQUE NOT NULL, -- Ensuring it's a 10-digit number
+    Account_Number BIGINT NOT NULL,
+    Mobile_Number BIGINT NOT NULL, -- Ensuring it's a 10-digit number
     Amount FLOAT NOT NULL,
-    PAN CHAR(10) UNIQUE NOT NULL,
+    PAN CHAR(10) NOT NULL,
     Maturity_Amount FLOAT,
     Invested_Date DATE NOT NULL,
     Maturity_Date DATE,
@@ -55,20 +57,24 @@ CREATE TABLE SAVINGS_DETAILS (
 );
 
 CREATE TABLE transactions(
-    Transaction_ID INT PRIMARY KEY,
+    Transaction_ID BIGINT PRIMARY KEY,
     User_ID INT ,
-    Credited_Amount FLOAT NOT NULL,
-    Credited_Date DATE NOT NULL,
-    Debited_Amount FLOAT NOT NULL,
-    Debited_Date DATE NOT NULL,
+    Credited_Amount FLOAT ,
+    Credited_Date DATE ,
+    Debited_Amount FLOAT ,
+    Debited_Date DATE ,
     FOREIGN KEY (User_ID) REFERENCES USER_DETAILS(User_ID)
 );
 
 desc savings_details;
+desc account_details;
+DESC user_details;
+
+desc transactions;
 SELECT* from account_details;
 SELECT* FROM user_details;
 SELECT* FROM savings_details;
 SELECT* FROM transactions;
-
-DELETE from savings_details;
+DROP TABLE transactions;
+DELETE from user_details;
 SHOW TABLES;

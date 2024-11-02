@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Savings Details</title>
-    <link rel="stylesheet" href="{{url_for('static',filename='css/savings.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/savings.css')}}">
 </head>
 <body>
     <div class="container">
@@ -32,27 +32,18 @@
             <label for="inv_date">Invested On:</label>
             <input type="date" id="inv_date" name="inv_date" required><br>
         
+            <input type="hidden" id="trans_id" name="trans_id">
+
             <button type="submit">Submit</button> 
         </form>
     </div>
     <script>
-        document.getElementById("myButton").addEventListener("click",function(){
-            myPopup.classList.add("show");
-        });
-        document.getElementById("closePopup").addEventListener("click",function(){
-            myPopup.classList.remove("show");
-        });
-        window.addEventListener("click",function(event){
-            if(event.target==myPopup){
-                myPopup.classList.remove("show");
-            }
-        });
         document.getElementById("savings-form").onsubmit = function() {
-            const transId = Math.floor(1000000000000 + Math.random() * 9000000000000);
+            const transId = Math.floor(100000000000 + Math.random() * 900000000000);
             alert("Form submitted successfully! Your transaction (ID: " + transId + ") was completed.");
-
+            document.getElementById("trans_id").value = transId;
+            console.log(transId);
         };
-
     </script>
 </body>
 </html>

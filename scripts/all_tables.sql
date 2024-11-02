@@ -2,6 +2,7 @@ CREATE DATABASE IF NOT EXISTS pfa_orange;
 
 USE pfa_orange;
 
+
 CREATE TABLE USER_DETAILS(
     User_ID INT PRIMARY KEY,
     User_name VARCHAR(50),
@@ -37,7 +38,7 @@ INSERT INTO schemes (Scheme_ID,Scheme_Name,Interest_Rate, Duration_In_Years) VAL
 (8,'FirstChoice Wealth FD', 7.2, 0.5),
 (9,'ValueSafe High Return FD', 6.75, 1),
 (10,'CapitalMax Booster FD', 7.1, 3);
-
+drop table savings_details;
 CREATE TABLE SAVINGS_DETAILS (
     User_ID_savings INT NOT NULL,
     Account_Number BIGINT UNIQUE NOT NULL,
@@ -47,7 +48,6 @@ CREATE TABLE SAVINGS_DETAILS (
     Maturity_Amount FLOAT,
     Invested_Date DATE NOT NULL,
     Maturity_Date DATE,
-    PRIMARY KEY (User_ID_savings, Account_Number),
     FOREIGN KEY (User_ID_savings) REFERENCES user_details(User_ID),
     FOREIGN KEY (Account_Number) REFERENCES account_details(acc_no)
 );
@@ -63,4 +63,9 @@ CREATE TABLE transactions(
 );
 
 desc savings_details;
-SELECT* from user_details;
+SELECT* from account_details;
+SELECT* FROM user_details;
+SELECT* FROM savings_details;
+SELECT* FROM transactions;
+
+SHOW TABLEs;

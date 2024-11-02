@@ -25,13 +25,13 @@
         <!-- Slideshow -->
         <div class="slideshow-container">
             <div class="text-slide fade">
-                <p>Manage your finances effectively with our app!</p>
+                <img src="C:\PES University\5th Sem\DBMS\Personalized-Financial-Assistance\static\images\img1.png" alt="Image 1">
             </div>
             <div class="text-slide fade">
-                <p>Track your spending and set budgets easily.</p>
+                <img src="/images/img2.png" alt="Image 2">
             </div>
             <div class="text-slide fade">
-                <p>Get personalized financial advice tailored to your needs.</p>
+                <img src="/images/img3.png" alt="Image 3">
             </div>
         </div>
 
@@ -60,34 +60,38 @@
     </div>
 
     <script>
-        let slideIndex = 1;
-        showSlides(slideIndex);
+        let slideIndex = 0;
+        let slideInterval;
+
+        function showSlides() {
+            const slides = document.getElementsByClassName("text-slide");
+            const dots = document.getElementsByClassName("dot");
+
+            // Hide all slides and remove active class from dots
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+                dots[i].classList.remove("active");
+            }
+
+            // Increment slideIndex and wrap around if needed
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+
+            // Show current slide and add active class to the corresponding dot
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].classList.add("active");
+        }
 
         function currentSlide(n) {
-            showSlides(slideIndex = n);
+            clearInterval(slideInterval);
+            slideIndex = n - 1;  // Set slideIndex to n-1 so showSlides() works as expected
+            showSlides();
+            slideInterval = setInterval(showSlides, 3000); // Restart the slideshow
         }
 
-        function showSlides(n) {
-            let i;
-            let slides = document.getElementsByClassName("text-slide");
-            let dots = document.getElementsByClassName("dot");
-            if (n > slides.length) { slideIndex = 1 }
-            if (n < 1) { slideIndex = slides.length }
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";  
-            }
-            for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" active", "");
-            }
-            slides[slideIndex - 1].style.display = "block";  
-            dots[slideIndex - 1].className += " active";
-        }
-
-        // Automatic slideshow
-        setInterval(() => {
-            slideIndex++;
-            showSlides(slideIndex);
-        }, 3000); // Change text every 3 seconds
+        // Initialize slideshow
+        showSlides();
+        slideInterval = setInterval(showSlides, 3000);
     </script>
 
 </body>

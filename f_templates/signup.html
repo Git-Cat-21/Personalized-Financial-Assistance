@@ -68,11 +68,29 @@
 
     <script>
         function generateUserId() {
+            let name=document.getElementById("password").value
+            let mob=document.getElementById("password").value
+            let email=document.getElementById("password").value
+            let acc_number=document.getElementById("password").value
+            let ifsc=document.getElementById("password").value
+            let pwd=document.getElementById("password").value
+            console.log(pwd)
+            let cpwd=document.getElementById("confirm_password").value
+            console.log(cpwd)
+            if(!name || !mob || !email || !acc_number || !ifsc || !pwd || !cpwd) {
+                alert("All fields are required");
+                return;
+            }
+            if (pwd !== cpwd) {  
+                alert("Password and Confirm password should be the same");
+                return;
+            }
             const userId = Math.floor(100000 + Math.random() * 900000);
             document.getElementById("display-user-id").textContent = `Your user ID is: ${userId}`;
             document.getElementById("user_id").value = userId;
             alert("Your user ID is: "+userId)
             document.getElementById("signup-form").submit();
+            console.log(userId)
         }
     </script>
 </body>

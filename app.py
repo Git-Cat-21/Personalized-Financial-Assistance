@@ -33,7 +33,7 @@ def login():
         if user and user[1] == password:  
             session['username'] = user[2]  
             flash("Login successful!", "success")
-            return redirect('index')
+            return redirect('/')
         else:
             flash("Invalid username or password.", "danger")
             return redirect('login')
@@ -42,7 +42,7 @@ def login():
 def logout():
     session.pop('username', None)  # Remove username from session
     flash("You have been logged out.", "success")
-    return redirect('index')     
+    return redirect('/')     
 
 @app.route("/schemes")
 def schemes():
@@ -107,7 +107,7 @@ def savings():
         db.commit()
 
         # flash ("Correct go in")
-        return redirect('index')
+        return redirect('/')
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0',debug=True)

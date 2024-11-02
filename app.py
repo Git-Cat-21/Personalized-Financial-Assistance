@@ -98,23 +98,25 @@ def savings():
     if request.method=='POST':
         trans_id = request.form['trans_id']
         user_id = request.form['user_id']
-        acc_no = request.form['acc_no']
-        mobile = request.form['mobile']
         scheme_id = request.form['scheme_id']
         amount = request.form['amount']
-        pan = request.form['pan']
         inv_date = request.form['inv_date']
         print(trans_id)
         cursor=db.cursor()
-        cursor.execute('''INSERT INTO savings_details (user_id_savings,account_number,mobile_number,Scheme_ID,amount,pan,invested_date) VALUES (%s, %s, %s, %s, %s, %s, %s) ''',(user_id, acc_no,mobile,scheme_id,amount,pan,inv_date))
-        cursor.execute('''INSERT INTO transactions(Transaction_ID,User_ID,Debit_Amount,Debit_Date) VALUES (%s,%s,%s,%s)''',(trans_id,user_id,amount,inv_date))
-        db.commit()
-
-        # flash ("Correct go in")
-        return redirect('schemes')
+        query=f"SELECT user_details.Mob,account_details.acc_no,account_details.pan FROM user_details JOIN account_details ON user_details.User_ID=account_details.user_id WHERE user_details.User_ID={user_id}"
+        cursor.execute(query)
+        result=cursor.fetchone()
+        print(result)
+        if result:
+            cursor.execute('''INSERT INTO savings_details (user_id_savings,account_number,mobile_number,Scheme_ID,amount,pan,invested_date) VALUES (%s, %s, %s, %s, %s, %s, %s) ''',(user_id, result[1],result[0],scheme_id,amount,result[2],inv_date))
+            cursor.execute('''INSERT INTO transactions(Transaction_ID,User_ID,Debit_Amount,Debit_Date) VALUES (%s,%s,%s,%s)''',(trans_id,user_id,amount,inv_date))
+            db.commit()
+            return redirect('schemes')
+        else:
+            return redirect("savings")
     
 if __name__ == "__main__":
     app.run(host='0.0.0.0',debug=True)
 
-#signup ,savings, homepage - Mahika
+# signup ,savings, homepage - Mahika
 # schemes, transactions(of specific user), login - Khushi

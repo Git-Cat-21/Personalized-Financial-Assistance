@@ -11,6 +11,14 @@ CREATE TABLE USER_DETAILS(
     Dob DATE,
     Pwd VARCHAR(20)
 );
+-- if you run into an error saying ck1 constraint is violated please run the following commands 
+
+-- SET FOREIGN_KEY_CHECKS = 0;
+
+-- ALTER TABLE user_details DROP CONSTRAINT ck1;
+
+-- SET FOREIGN_KEY_CHECKS = 1;
+
 CREATE TABLE ACCOUNT_DETAILS(
     SI_no INT PRIMARY KEY AUTO_INCREMENT,
     acc_no BIGINT UNIQUE,
@@ -21,6 +29,8 @@ CREATE TABLE ACCOUNT_DETAILS(
     user_id int,
     Foreign Key (user_id) REFERENCES user_details(User_ID)
 );
+ALTER TABLE account_details ADD COLUMN pan CHAR(10) AFTER ifsc;
+
 CREATE TABLE schemes(
     Scheme_ID INT PRIMARY KEY,
     Scheme_Name VARCHAR(40),
@@ -56,6 +66,8 @@ CREATE TABLE SAVINGS_DETAILS (
     FOREIGN KEY (Scheme_ID) REFERENCES schemes(Scheme_ID)
 );
 
+-- ALTER TABLE savings_details ADD COLUMN Scheme_ID INT NOT NULL AFTER Mobile_number;
+
 CREATE TABLE transactions(
     Transaction_ID BIGINT PRIMARY KEY,
     User_ID INT ,
@@ -65,3 +77,17 @@ CREATE TABLE transactions(
     Debit_Date DATE ,
     FOREIGN KEY (User_ID) REFERENCES USER_DETAILS(User_ID)
 );
+
+
+desc savings_details;
+desc account_details;
+DESC user_details;
+
+desc transactions;
+SELECT* from account_details;
+SELECT* FROM user_details;
+SELECT* FROM savings_details;
+SELECT* FROM transactions;
+DROP TABLE transactions;
+DELETE from user_details;
+SHOW TABLES;

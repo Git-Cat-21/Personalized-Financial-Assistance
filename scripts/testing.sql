@@ -30,3 +30,4 @@ SELECT* FROM transactions;
 DROP TABLE transactions;
 DELETE from user_details;
 SHOW TABLES;
+ALTER TABLE account_details ADD COLUMN pan CHAR(10) AFTER ifsc;

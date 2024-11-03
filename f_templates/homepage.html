@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
-    <link rel="stylesheet" href="{{url_for('static',filename='css/homepage.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/homepage.css')}}">
 </head>
 <body>
-
     <div class="header">
         {% if session.get('username') %}
-            <button id="userButton">{{ session['username'] }}</button>
+            <a href="#" id="userButton">{{ session['username'] }}</a>
+            <div id="myPopup" class="popup">
+                <h1>Hi {{ session['username'] }}</h1>
+                <p>Your profile</p>
+                <button id="closePopup">Close</button>
+            </div>
             <a href="{{ url_for('logout') }}">Logout</a>
         {% else %}
             <a href="/login">Login</a>
@@ -33,14 +37,18 @@
             <div class="text-slide fade">
                 <img src="/static/images/img3.png" alt="Image 3">
             </div>
+            <div class="text-slide fade">
+                <img src="/static/images/img4.png" alt="Image 3">
+            </div>
         </div>
-
+        
         <br>
 
         <div style="text-align:center">
             <span class="dot" onclick="currentSlide(1)"></span>
             <span class="dot" onclick="currentSlide(2)"></span>
             <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
         </div>
 
         <p>
@@ -58,6 +66,9 @@
             <p>Email: support@financialapp.com | Phone: +91 9342059485</p>
         </div>
     </div>
+
+    <!-- Overlay for faded background -->
+    <div id="overlay" class="overlay"></div>
 
     <script>
         let slideIndex = 0;
@@ -92,7 +103,28 @@
         // Initialize slideshow
         showSlides();
         slideInterval = setInterval(showSlides, 3000);
-    </script>
 
+        // Popup and overlay functionality
+        const userButton = document.getElementById("userButton");
+        const myPopup = document.getElementById("myPopup");
+        const overlay = document.getElementById("overlay");
+        const closePopup = document.getElementById("closePopup");
+
+        userButton.addEventListener("click", () => {
+            const isPopupVisible = myPopup.style.display === "block";
+            myPopup.style.display = isPopupVisible ? "none" : "block";
+            overlay.style.display = isPopupVisible ? "none" : "block";
+        });
+
+        closePopup.addEventListener("click", () => {
+            myPopup.style.display = "none";
+            overlay.style.display = "none";
+        });
+
+        overlay.addEventListener("click", () => {
+            myPopup.style.display = "none";
+            overlay.style.display = "none";
+        });
+    </script>
 </body>
 </html>

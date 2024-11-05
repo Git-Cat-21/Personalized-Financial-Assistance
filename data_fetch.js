@@ -36,7 +36,18 @@ app.get('/schemes', (req, res) => {
     });
 });
 
-// Start the server
+app.get('/transactions', (req, res) => {
+    const userId = req.query.user_id; 
+    if (!userId) {
+        return res.status(400).send("User ID not provided");
+    }
+
+    con.query('SELECT * FROM transactions WHERE User_ID = ?', [userId], (error, results) => {
+        if (error) throw error;
+        res.render('transaction_history', { transactions: results });
+    });
+});
+
 app.listen(3000,'0.0.0.0', () => {
     console.log("Server running on port 3000");
 });

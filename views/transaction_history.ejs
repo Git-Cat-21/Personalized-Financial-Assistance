@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transaction History</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        h1 {
+            color: #003366;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        #back {
+            text-decoration: none;
+            color: #0056b3;
+            font-size: 14px;
+            display: inline-block;
+            margin-bottom: 20px;
+            transition: color 0.3s ease;
+        }
+
+        #back:hover {
+            color: #003366;
+        }
+
+        /* Table Styling */
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #003366;
+            color: #fff;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        td {
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 14px;
+        }
+
+        tr:hover {
+            background-color: #f0f8ff;
+        }
+
+        /* Button */
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 14px;
+            color: #fff;
+            background-color: #0056b3;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #003366;
+        }
+
+    </style>
+</head>
+<body>
+    <a href="/schemes" id="back">← Back to Schemes</a>
+
+    <h1>Transaction History</h1>
+
+    <table>
+        <tr>
+            <th>Transaction ID</th>
+            <th>User ID</th>
+            <th>Credit Amount</th>
+            <th>Credit Date</th>
+            <th>Debit Amount</th>
+            <th>Debit Date</th>
+        </tr>
+        <% transactions.forEach(function(transaction) { %>
+            <tr>
+                <td><%= transaction.Transaction_ID %></td>
+                <td><%= transaction.User_ID %></td>
+                <td><%= transaction.Credit_Amount ? `₹${transaction.Credit_Amount.toFixed(2)}` : '-' %></td>
+                <td><%= transaction.Credit_Date ? new Date(transaction.Credit_Date).toLocaleDateString() : '-' %></td>
+                <td><%= transaction.Debit_Amount ? `₹${transaction.Debit_Amount.toFixed(2)}` : '-' %></td>
+                <td><%= transaction.Debit_Date ? new Date(transaction.Debit_Date).toLocaleDateString() : '-' %></td>
+            </tr>
+        <% }) %>
+    </table>
+
+    <button onclick="window.location.href='/schemes'">Return to Schemes</button>
+</body>
+</html>

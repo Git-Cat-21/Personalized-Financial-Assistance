@@ -261,7 +261,9 @@
         }
 
         document.getElementById("myButton").addEventListener("click", () => {
-            document.getElementById("myPopup").style.display = "block";
+            userId=prompt("Enter your user id")
+            window.location.href = `/transactions?user_id=${userId}`;
+
         });
 
         document.getElementById("closePopup").addEventListener("click", () => {

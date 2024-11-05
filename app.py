@@ -124,12 +124,11 @@ def savings():
             mat_amt = cursor.fetchone()[0]
             mat_date = maturity_date(int(scheme_id))
             print(mat_date)
-            # inv_date=mat_date[0]
             cursor.execute('''INSERT INTO savings_details (user_id_savings, account_number, mobile_number, Scheme_ID, amount, pan, Maturity_Amount, invested_date, Maturity_Date) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s) ''', (user_id, result[1], result[0], scheme_id, amount, result[2], mat_amt, mat_date[0], mat_date[1]))
             db.commit()
-            # cursor = db.cursor()
-            # cursor.execute('''INSERT INTO transactions(Transaction_ID, User_ID, Debit_Amount, Debit_Date) VALUES (%s, %s, %s, %s)''', (trans_id, user_id, amount, inv_date))
-            # db.commit()
+            cursor = db.cursor()
+            cursor.execute('''INSERT INTO transactions(Transaction_ID, User_ID, Debit_Amount, Debit_Date,Credit_Amount,Credit_Date) VALUES (%s, %s, %s, %s, %s, %s)''', (trans_id, user_id, amount, mat_date[0],mat_amt,mat_date[1]))
+            db.commit()
             return redirect(url_for('schemes'))
         else:
             return redirect(url_for("savings"))

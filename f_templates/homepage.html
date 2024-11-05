@@ -15,7 +15,7 @@
             </a>
 
             <!-- Profile Popup -->
-            <div id="myPopup" class="popup">
+            <!-- <div id="myPopup" class="popup">
                 {% for user in query %}
                     <h1>Hi {{ session.get('username') }}</h1>
                     <p>User ID: {{ user[0] }}</p>
@@ -24,7 +24,7 @@
                     <p>Email id: {{ user[3] }}</p>
                     <button id="closePopup" onclick="togglePopup()">Close</button>
                 {% endfor %}
-            </div>
+            </div> -->
 
             <a href="{{ url_for('logout') }}">Logout</a>
         {% else %}

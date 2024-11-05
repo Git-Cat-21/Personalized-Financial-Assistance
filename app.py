@@ -27,10 +27,10 @@ def login_required(f):
 
 @app.route("/")
 def index():
-    userid = session['userid']
-    cursor.execute('SELECT * FROM user_details WHERE User_ID = %s', (userid,))
-    query = cursor.fetchall()
-    return render_template('homepage.html', query = query)
+    # userid = session['userid']
+    # cursor.execute('SELECT * FROM user_details WHERE User_ID = %s', (userid,))
+    # query = cursor.fetchall()
+    return render_template('homepage.html')
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():

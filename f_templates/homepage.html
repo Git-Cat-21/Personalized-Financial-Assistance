@@ -9,13 +9,11 @@
 <body>
     <div class="header">
         {% if session.get('username') %}
-            <!-- User Profile Button -->
             <a href="#" id="userButton" onclick="togglePopup()"> 
                 {{ session.get('username') }}
             </a>
 
-            <!-- Profile Popup -->
-            <!-- <div id="myPopup" class="popup">
+            <div id="myPopup" class="popup">
                 {% for user in query %}
                     <h1>Hi {{ session.get('username') }}</h1>
                     <p>User ID: {{ user[0] }}</p>
@@ -24,7 +22,7 @@
                     <p>Email id: {{ user[3] }}</p>
                     <button id="closePopup" onclick="togglePopup()">Close</button>
                 {% endfor %}
-            </div> -->
+            </div>
 
             <a href="{{ url_for('logout') }}">Logout</a>
         {% else %}
@@ -37,7 +35,6 @@
     <div class="content">
         <h1>Personalised Financial Assistance</h1>
         
-        <!-- Slideshow Section -->
         <div class="slideshow-container">
             <div class="text-slide fade">
                 <img src="/static/images/img1.png" alt="Image 1" style="width:100%">
@@ -76,12 +73,9 @@
         </div>
     </div>
 
-    <!-- Overlay for faded background -->
     <div id="overlay" class="overlay" onclick="togglePopup()"></div>
 
-    <!-- JavaScript for Slideshow and Popup Functionality -->
     <script>
-        // Slideshow Functionality
         let slideIndex = 0;
         let slideInterval;
 
@@ -89,33 +83,27 @@
             const slides = document.getElementsByClassName("text-slide");
             const dots = document.getElementsByClassName("dot");
 
-            // Hide all slides and remove active class from dots
             for (let i = 0; i < slides.length; i++) {
                 slides[i].style.display = "none";
                 dots[i].classList.remove("active");
             }
 
-            // Increment slideIndex and wrap around if needed
             slideIndex++;
             if (slideIndex > slides.length) { slideIndex = 1 }
 
-            // Show current slide and add active class to the corresponding dot
             slides[slideIndex - 1].style.display = "block";
             dots[slideIndex - 1].classList.add("active");
         }
 
         function currentSlide(n) {
             clearInterval(slideInterval);
-            slideIndex = n - 1;  // Set slideIndex to n-1 so showSlides() works as expected
+            slideIndex = n - 1; 
             showSlides();
-            slideInterval = setInterval(showSlides, 3000); // Restart the slideshow
+            slideInterval = setInterval(showSlides, 3000); 
         }
-
-        // Initialize slideshow
         showSlides();
         slideInterval = setInterval(showSlides, 3000);
 
-        // Popup and Overlay Functionality
         function togglePopup() {
             const popup = document.getElementById("myPopup");
             const overlay = document.getElementById("overlay");

@@ -6,6 +6,14 @@ from date_calc import *
 app = Flask(__name__, template_folder="f_templates")
 app.secret_key = "77d48e2e153c7796b4bdd39598f9935b6165f26ff8e1eb3b"
 
+@app.before_request
+def initialize_session():
+    if 'username' not in session:
+        session['username'] = None
+    if 'userid' not in session:
+        session['userid'] = None
+
+
 db = mysql.connector.connect(
     host="localhost",
     user="root",
@@ -15,7 +23,6 @@ db = mysql.connector.connect(
 
 cursor = db.cursor()
 
-# Login check decorator
 def login_required(f):
     def decorated_function(*args, **kwargs):
         if 'username' not in session:
@@ -27,10 +34,10 @@ def login_required(f):
 
 @app.route("/")
 def index():
-    # userid = session['userid']
-    # cursor.execute('SELECT * FROM user_details WHERE User_ID = %s', (userid,))
-    # query = cursor.fetchall()
-    return render_template('homepage.html')
+    userid = session['userid']
+    cursor.execute('SELECT * FROM user_details WHERE User_ID = %s', (userid,))
+    query = cursor.fetchall()
+    return render_template('homepage.html', query = query)
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -55,8 +62,10 @@ def login():
 
 @app.route("/logout")
 def logout():
-    session.pop('username', None)  # Remove username from session
+    session.pop('username', None) 
+    session.pop('userid', None)  
     flash("You have been logged out.", "success")
+    print(session)
     return redirect('/')     
 
 @app.route("/schemes")
@@ -70,7 +79,6 @@ def forgot_pwd():
     elif request.method == 'POST':
         username = request.form['username']
         new_password = request.form['new_password']
-        # Update password in database
         cursor.execute('UPDATE user_details SET pwd = %s WHERE user_id = %s', (new_password, username))
         db.commit()
         return redirect(url_for('login'))
@@ -80,7 +88,6 @@ def signup():
     if request.method == 'GET':
         return render_template('signup.html')
     elif request.method == 'POST':
-        # Retrieve form data
         user_id = request.form['user_id']
         name = request.form['name']
         mobile = request.form['mobile']
@@ -95,14 +102,12 @@ def signup():
         acc_type = request.form['acc_type']
         created_on = request.form['created_on']
         if password == conf_pwd:
-            # Insert data into the database
             cursor = db.cursor()
             cursor.execute('''INSERT INTO user_details (user_id, user_name, mob, email_id, dob, pwd) VALUES (%s, %s, %s, %s, %s, %s)''', (user_id, name, mobile, email, dob, password))
             cursor.execute('''INSERT INTO account_details (acc_no, ifsc, pan, acc_status, acc_type, acc_create, user_id) VALUES (%s, %s, %s, %s, %s, %s, %s)''', (acc_number, ifsc, pan, status, acc_type, created_on, user_id))
             db.commit()
         else:
             return redirect(url_for('signup'))
-        # Redirect to the index page or a success page
         return redirect(url_for('login'))
 
 @app.route("/savings", methods=['GET', 'POST'])
@@ -138,6 +143,3 @@ def savings():
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)
-
-# signup ,savings, homepage - Mahika
-# schemes, transactions(of specific user), login - Khushi

@@ -80,16 +80,17 @@ CREATE TABLE transactions(
 
 
 desc savings_details;
-desc account_details;
+desc transactions;
 DESC user_details;
 
-desc transactions;
+desc account_details;
 SELECT* from account_details;
 SELECT* FROM user_details;
 SELECT* FROM savings_details;
 SELECT* FROM transactions;
 DROP TABLE transactions;
 DELETE from user_details;
+DELETE from account_details;
 SHOW TABLES;
 
 DELIMITER //

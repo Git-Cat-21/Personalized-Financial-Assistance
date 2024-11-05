@@ -4,17 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='css/homepage.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/homepage.css') }}">
 </head>
 <body>
     <div class="header">
         {% if session.get('username') %}
-            <a href="#" id="userButton">{{ session['username'] }}</a>
+            <!-- User Profile Button -->
+            <a href="#" id="userButton" onclick="togglePopup()"> 
+                {{ session.get('username') }}
+            </a>
+
+            <!-- Profile Popup -->
             <div id="myPopup" class="popup">
-                <h1>Hi {{ session['username'] }}</h1>
-                <p>Your profile</p>
-                <button id="closePopup">Close</button>
+                {% for user in query %}
+                    <h1>Hi {{ session.get('username') }}</h1>
+                    <p>User ID: {{ user[0] }}</p>
+                    <p>Name: {{ user[1] }}</p>
+                    <p>Mobile number: {{ user[2] }}</p>
+                    <p>Email id: {{ user[3] }}</p>
+                    <button id="closePopup" onclick="togglePopup()">Close</button>
+                {% endfor %}
             </div>
+
             <a href="{{ url_for('logout') }}">Logout</a>
         {% else %}
             <a href="/login">Login</a>
@@ -26,19 +37,19 @@
     <div class="content">
         <h1>Personalised Financial Assistance</h1>
         
-        <!-- Slideshow -->
+        <!-- Slideshow Section -->
         <div class="slideshow-container">
             <div class="text-slide fade">
-                <img src="/static/images/img1.png" alt="Image 1">
+                <img src="/static/images/img1.png" alt="Image 1" style="width:100%">
             </div>
             <div class="text-slide fade">
-                <img src="/static/images/img2.png" alt="Image 2">
+                <img src="/static/images/img2.png" alt="Image 2" style="width:100%">
             </div>
             <div class="text-slide fade">
-                <img src="/static/images/img3.png" alt="Image 3">
+                <img src="/static/images/img3.png" alt="Image 3" style="width:100%">
             </div>
             <div class="text-slide fade">
-                <img src="/static/images/img4.png" alt="Image 3">
+                <img src="/static/images/img4.png" alt="Image 4" style="width:100%">
             </div>
         </div>
         
@@ -56,9 +67,7 @@
             effectively. It helps track spending, set budgets, monitor savings goals, and offer personalized 
             financial advice. The app may include features such as expense tracking, bill reminders, 
             financial planning, and loan management. It can also provide insights into credit scores, 
-            investment opportunities, and debt reduction strategies. By integrating bank accounts and 
-            financial data, the app offers real-time analysis, helping users make informed decisions, 
-            achieve financial stability, and improve their overall financial health.
+            investment opportunities, and debt reduction strategies.
         </p>
 
         <div class="contact-info">
@@ -68,9 +77,11 @@
     </div>
 
     <!-- Overlay for faded background -->
-    <div id="overlay" class="overlay"></div>
+    <div id="overlay" class="overlay" onclick="togglePopup()"></div>
 
+    <!-- JavaScript for Slideshow and Popup Functionality -->
     <script>
+        // Slideshow Functionality
         let slideIndex = 0;
         let slideInterval;
 
@@ -104,27 +115,14 @@
         showSlides();
         slideInterval = setInterval(showSlides, 3000);
 
-        // Popup and overlay functionality
-        const userButton = document.getElementById("userButton");
-        const myPopup = document.getElementById("myPopup");
-        const overlay = document.getElementById("overlay");
-        const closePopup = document.getElementById("closePopup");
-
-        userButton.addEventListener("click", () => {
-            const isPopupVisible = myPopup.style.display === "block";
-            myPopup.style.display = isPopupVisible ? "none" : "block";
+        // Popup and Overlay Functionality
+        function togglePopup() {
+            const popup = document.getElementById("myPopup");
+            const overlay = document.getElementById("overlay");
+            const isPopupVisible = popup.style.display === "block";
+            popup.style.display = isPopupVisible ? "none" : "block";
             overlay.style.display = isPopupVisible ? "none" : "block";
-        });
-
-        closePopup.addEventListener("click", () => {
-            myPopup.style.display = "none";
-            overlay.style.display = "none";
-        });
-
-        overlay.addEventListener("click", () => {
-            myPopup.style.display = "none";
-            overlay.style.display = "none";
-        });
+        }
     </script>
 </body>
 </html>

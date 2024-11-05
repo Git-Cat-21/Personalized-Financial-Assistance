@@ -27,7 +27,11 @@ def login_required(f):
 
 @app.route("/")
 def index():
-    return render_template('homepage.html')
+    userid = session['userid']
+    cursor.execute('SELECT * FROM user_details WHERE User_ID = %s', (userid,))
+    query = cursor.fetchall()
+    print(query)
+    return render_template('homepage.html', query = query)
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -44,6 +48,7 @@ def login():
         print("Retrieved user data:", user)
         if user and user[1] == password:  
             session['username'] = user[2]  
+            session['userid'] = user[0]
             flash("Login successful!", "success")
             return redirect('/')
         else:

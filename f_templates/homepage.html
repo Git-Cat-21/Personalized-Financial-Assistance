@@ -8,6 +8,7 @@
 </head>
 <body>
     <div class="header">
+        
         {% if session.get('username') %}
             <a href="#" id="userButton" onclick="togglePopup()"> 
                 {{ session.get('username') }}
@@ -58,17 +59,19 @@
             <span class="dot" onclick="currentSlide(3)"></span>
             <span class="dot" onclick="currentSlide(4)"></span>
         </div>
-
-        <p>
-            A financial assistance app provides users with tools and resources to manage their finances 
-            effectively. It helps track spending, set budgets, monitor savings goals, and offer personalized 
-            financial advice. The app may include features such as expense tracking, bill reminders, 
-            financial planning, and loan management. It can also provide insights into credit scores, 
-            investment opportunities, and debt reduction strategies.
-        </p>
+        <div class="about-info"> 
+            <h3> About Us</h3>
+            <p>
+                A financial assistance app provides users with tools and resources to manage their finances 
+                effectively. It helps track spending, set budgets, monitor savings goals, and offer personalized 
+                financial advice. The app may include features such as expense tracking, bill reminders, 
+                financial planning, and loan management. It can also provide insights into credit scores, 
+                investment opportunities, and debt reduction strategies.
+            </p>
+        </div>
 
         <div class="contact-info">
-            <p>Contact Us:</p>
+            <h3>Contact Us</h3>
             <p>Email: support@financialapp.com | Phone: +91 9342059485</p>
         </div>
     </div>

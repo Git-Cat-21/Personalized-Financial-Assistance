@@ -99,9 +99,9 @@ def admin():
             cursor = db.cursor()
             cursor.execute("DELETE FROM user_details WHERE User_ID = %s", (user_id,))
             db.commit()
-            return render_template("homepage.html")
-        else:
             return render_template("admin.html")
+        else:
+            return render_template("homepage.html")
         
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():

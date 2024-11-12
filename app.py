@@ -88,7 +88,11 @@ def admin():
         admin_name=request.form['admin_name']
         password=request.form['pass_wd']
         user_id=request.form['user_id']
-        print(admin_name,password,user_id)
+        cursor.execute("SELECT password FROM admin WHERE admin_name=%s",(admin_name,))
+        values=cursor.fetchone()
+        if values[0]==password:
+            
+        
         return render_template("admin.html")
     
 @app.route("/signup", methods=['GET', 'POST'])

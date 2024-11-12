@@ -20,7 +20,6 @@ CREATE TABLE USER_DETAILS(
 -- SET FOREIGN_KEY_CHECKS = 1;
 
 CREATE TABLE ACCOUNT_DETAILS(
-    SI_no INT PRIMARY KEY AUTO_INCREMENT,
     acc_no BIGINT UNIQUE,
     ifsc VARCHAR(20),
     acc_status ENUM('Active','Inactive'),
@@ -28,6 +27,7 @@ CREATE TABLE ACCOUNT_DETAILS(
     acc_create DATE,
     user_id int,
     Foreign Key (user_id) REFERENCES user_details(User_ID)
+    ON DELETE CASCADE
 );
 ALTER TABLE account_details ADD COLUMN pan CHAR(10) AFTER ifsc;
 
@@ -64,6 +64,7 @@ CREATE TABLE SAVINGS_DETAILS (
     FOREIGN KEY (User_ID_savings) REFERENCES user_details(User_ID),
     FOREIGN KEY (Account_Number) REFERENCES account_details(acc_no),
     FOREIGN KEY (Scheme_ID) REFERENCES schemes(Scheme_ID)
+    ON DELETE CASCADE
 );
 
 -- ALTER TABLE savings_details ADD COLUMN Scheme_ID INT NOT NULL AFTER Mobile_number;
@@ -76,6 +77,7 @@ CREATE TABLE transactions(
     Debit_Amount FLOAT ,
     Debit_Date DATE ,
     FOREIGN KEY (User_ID) REFERENCES USER_DETAILS(User_ID)
+    ON DELETE CASCADE
 );
 
 
@@ -151,3 +153,9 @@ INSERT INTO admin (admin_name,password)VALUES
     ('admin3','74125');
 
 SELECT * FROM admin;
+
+DROP TABLE transactions;
+DROP TABLE savings_details;
+DROP TABLE account_details;
+
+SHOW TABLES;

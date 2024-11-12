@@ -80,21 +80,26 @@ def forgot_pwd():
         db.commit()
         return redirect(url_for('login'))
 
-@app.route("/admin",methods=['GET','POST'])
+@app.route("/admin", methods=['GET', 'POST'])
 def admin():
-    if request.method=="GET":
+    if request.method == "GET":
         return render_template("admin.html")
-    elif request.method=="POST":
-        admin_name=request.form['admin_name']
-        password=request.form['pass_wd']
-        user_id=request.form['user_id']
-        cursor.execute("SELECT password FROM admin WHERE admin_name=%s",(admin_name,))
-        values=cursor.fetchone()
-        if values[0]==password:
+    elif request.method == "POST":
+        admin_name = request.form['admin_name']
+        password = request.form['pass_wd']
+        user_id = request.form['user_id']
+        cursor = db.cursor()
+        cursor.execute("SELECT password FROM admin WHERE admin_name = %s", (admin_name,))
+        values = cursor.fetchone()
+
+        if values and values[0] == password:
+            cursor = db.cursor()
+            cursor.execute("DELETE FROM transactions WHERE User_ID = %s", (user_id,))
+            db.commit()
+            return render_template("homepage.html")
+        else:
+            return render_template("admin.html")
             
-        
-        return render_template("admin.html")
-    
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():
     if request.method == 'GET':

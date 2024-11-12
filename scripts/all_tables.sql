@@ -159,3 +159,5 @@ DROP TABLE savings_details;
 DROP TABLE account_details;
 
 SHOW TABLES;
+
+SELECT * FROM transactions;

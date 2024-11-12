@@ -1,0 +1,100 @@
+/* General styling */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Body styling */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f3f4f6;
+}
+
+/* Form styling */
+form#admin-page {
+    background-color: #ffffff;
+    padding: 2rem;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+form#admin-page h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+/* Label styling */
+form#admin-page label {
+    display: block;
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 0.3rem;
+}
+
+/* Input field styling */
+form#admin-page input[type="text"],
+form#admin-page input[type="password"] {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+form#admin-page input[type="text"]:focus,
+form#admin-page input[type="password"]:focus {
+    border-color: #0077b6;
+    outline: none;
+}
+
+/* Button styling */
+form#admin-page button[type="submit"] {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #0077b6;
+    color: #fff;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form#admin-page button[type="submit"]:hover {
+    background-color: #005f8a;
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+    form#admin-page {
+        padding: 1.5rem;
+        width: 90%;
+    }
+}
+
+.return-to-home {
+    background-color: transparent;
+    color: #34495e;
+    border: none;
+    text-decoration: underline;
+    font-weight: normal;
+    cursor: pointer;
+    margin-top: -10px;
+}
+
+/* Remove hover effect for return-to-home button */
+.return-to-home:hover {
+    color: #34495e;
+    background-color: white;
+}

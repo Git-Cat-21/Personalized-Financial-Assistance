@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin Page</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/admin.css')}}"
 </head>
 <body>
     <form id="admin-page" action="{{url_for('admin')}}" method="POST">
@@ -17,6 +18,7 @@
         <input type="text" id="user_id" name="user_id" required>
 
         <button type="submit">Submit</button>
+        <button type="button" class="return-to-home" onclick="window.location.href='/'"">Return to Home Page</button>
     </form>
 </body>
 </html>

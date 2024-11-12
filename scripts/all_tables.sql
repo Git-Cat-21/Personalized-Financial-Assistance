@@ -115,3 +115,26 @@ BEGIN
     
     RETURN mat_amt1;
 END//
+
+
+DELIMITER //
+
+CREATE TRIGGER insert_row
+AFTER INSERT ON transactions
+FOR EACH ROW 
+BEGIN
+
+    DECLARE amt FLOAT;
+    DECLARE s_id INT;
+
+    SELECT Amount,Scheme_ID into amt,s_id 
+    FROM SAVINGS_DETAILS 
+    WHERE User_ID=NEW.User_ID;
+
+    UPDATE transactions 
+    SET Credit_Amount = calc_int_amt(amt,s_id)
+    WHERE User_ID=NEW.User_ID;
+END;
+//
+
+DELIMITER ;

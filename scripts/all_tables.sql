@@ -138,3 +138,16 @@ END;
 //
 
 DELIMITER ;
+
+CREATE TABLE admin(
+admin_name VARCHAR(10) PRIMARY KEY,
+password VARCHAR(20));
+
+-- DUMMY VALUES
+
+INSERT INTO admin (admin_name,password)VALUES
+    ('admin1','12345'),
+    ('admin2','67890'),
+    ('admin3','74125');
+
+SELECT * FROM admin;

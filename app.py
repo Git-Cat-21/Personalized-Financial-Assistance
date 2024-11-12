@@ -75,9 +75,12 @@ def forgot_pwd():
         return render_template('forgot_pwd.html')
     elif request.method == 'POST':
         username = request.form['username']
-        new_password = request.form['new_password']
-        cursor.execute('UPDATE user_details SET pwd = %s WHERE user_id = %s', (new_password, username))
+        new_password = request.form['password']  # Changed to match form field 'password'
+        
+        # Update the user's password in the database
+        cursor.execute('UPDATE user_details SET Pwd = %s WHERE User_Id = %s', (new_password, username))
         db.commit()
+        
         return redirect(url_for('login'))
 
 @app.route("/admin", methods=['GET', 'POST'])

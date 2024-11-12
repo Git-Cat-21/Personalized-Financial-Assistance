@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Change password</title>
+    <title>Change Password</title>
     <link rel="stylesheet" href="{{url_for('static',filename='css/forgot_pwd.css')}}">
 </head>
 <body>
     <div class="container">
-        <h1>Change password</h1>
+        <h1>Change Password</h1>
         
         <form method="POST" action="{{url_for('forgot_pwd')}}">
             <label for="username">UserID:</label>
@@ -17,11 +17,17 @@
             <label for="password">New Password:</label>
             <input type="password" id="password" name="password" required>
         
-            <label for="password">Confirm New Password:</label>
-            <input type="password" id="password" name="password" required>
+            <label for="cpassword">Confirm New Password:</label>
+            <input type="password" id="cpassword" name="cpassword" required>
         
             <input type="submit" value="Submit">
         </form>
     </div>
+    <script>
+        function generateUserId() {
+            let pwd = document.getElementById("password").value;
+            console.log(pwd);
+        }
+    </script>
 </body>
 </html>

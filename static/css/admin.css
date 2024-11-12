@@ -60,14 +60,10 @@ button:hover {
     background-color: #545b62;
 }
 
-/* Add this to your HTML file */
-
-/* Update the body font-family */
 body {
     font-family: 'Roboto', sans-serif;
 }
 
-/* Add a header to your form */
 #admin-page::before {
     content: "Admin";
     display: block;

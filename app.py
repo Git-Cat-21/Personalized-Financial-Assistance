@@ -94,12 +94,15 @@ def admin():
 
         if values and values[0] == password:
             cursor = db.cursor()
-            cursor.execute("DELETE FROM transactions WHERE User_ID = %s", (user_id,))
+            cursor.execute("DELETE FROM SAVINGS_DETAILS WHERE User_ID_savings = %s", (user_id,))
+            db.commit()
+            cursor = db.cursor()
+            cursor.execute("DELETE FROM user_details WHERE User_ID = %s", (user_id,))
             db.commit()
             return render_template("homepage.html")
         else:
             return render_template("admin.html")
-            
+        
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():
     if request.method == 'GET':

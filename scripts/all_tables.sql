@@ -121,25 +121,31 @@ END//
 
 DELIMITER //
 
-CREATE TRIGGER insert_row
-AFTER INSERT ON transactions
-FOR EACH ROW 
+CREATE TRIGGER insert_row 
+AFTER INSERT ON transactions 
+FOR EACH ROW  
 BEGIN
-
     DECLARE amt FLOAT;
     DECLARE s_id INT;
+    DECLARE interest_rate FLOAT;
+    DECLARE total_savings FLOAT;
 
-    SELECT Amount,Scheme_ID into amt,s_id 
-    FROM SAVINGS_DETAILS 
-    WHERE User_ID=NEW.User_ID;
+    SELECT sd.Amount, sd.Scheme_ID, sc.Interest_Rate, 
+           (SELECT SUM(Amount) FROM SAVINGS_DETAILS WHERE User_ID = NEW.User_ID) AS total_savings
+    INTO amt, s_id, interest_rate, total_savings
+    FROM SAVINGS_DETAILS sd
+    JOIN SCHEME sc ON sd.Scheme_ID = sc.Scheme_ID
+    WHERE sd.User_ID = NEW.User_ID
+    LIMIT 1;
 
-    UPDATE transactions 
-    SET Credit_Amount = calc_int_amt(amt,s_id)
-    WHERE User_ID=NEW.User_ID;
-END;
-//
+    UPDATE transactions
+    SET Credit_Amount = calc_int_amt(amt, s_id, interest_rate, total_savings)
+    WHERE Transaction_ID = NEW.Transaction_ID;
+END //
 
 DELIMITER ;
+
+
 
 CREATE TABLE admin(
 admin_name VARCHAR(10) PRIMARY KEY,

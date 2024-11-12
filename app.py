@@ -79,6 +79,13 @@ def forgot_pwd():
         cursor.execute('UPDATE user_details SET pwd = %s WHERE user_id = %s', (new_password, username))
         db.commit()
         return redirect(url_for('login'))
+
+@app.route("/admin",methods=['GET','POST'])
+def admin():
+    if request.method=="GET":
+        return render_template("admin.html")
+    elif request.method=="POST":
+        return redirect(url_for(admin))
     
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():

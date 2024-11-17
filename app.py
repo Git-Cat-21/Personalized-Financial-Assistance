@@ -75,9 +75,8 @@ def forgot_pwd():
         return render_template('forgot_pwd.html')
     elif request.method == 'POST':
         username = request.form['username']
-        new_password = request.form['password']  # Changed to match form field 'password'
+        new_password = request.form['password'] 
         
-        # Update the user's password in the database
         cursor.execute('UPDATE user_details SET Pwd = %s WHERE User_Id = %s', (new_password, username))
         db.commit()
         

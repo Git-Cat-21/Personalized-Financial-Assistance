@@ -43,12 +43,21 @@ INSERT INTO schemes (Scheme_ID,Scheme_Name,Interest_Rate, Duration_In_Years) VAL
 (2,'GoldTrust Growth FD', 7.0, 2),
 (3,'SafeInvest Future Plan', 7.5, 5),
 (4,'TrustCapital Secure FD', 6.8, 3),
-(5,'PrimeBank Senior Citizen FD', 8.0, 1.5),
+(5,'PrimeBank Senior Citizen FD', 8.0, 2),
 (6,'GrowthBank Fixed Plan', 8.2, 10),
 (7,'HorizonFinance Flexi FD', 5.0, 6),
-(8,'FirstChoice Wealth FD', 7.2, 0.5),
+(8,'FirstChoice Wealth FD', 7.2, 1),
 (9,'ValueSafe High Return FD', 6.75, 1),
 (10,'CapitalMax Booster FD', 7.1, 3);
+
+-- SET FOREIGN_KEY_CHECKS = 0;
+
+-- UPDATE  schemes set Duration_In_Years=2 WHERE Scheme_id=5;
+-- UPDATE  schemes set Duration_In_Years=1 WHERE Scheme_id=8;
+
+-- SET FOREIGN_KEY_CHECKS = 1;
+
+SELECT * FROM schemes;
 
 CREATE TABLE SAVINGS_DETAILS (
     SI_no INT PRIMARY KEY AUTO_INCREMENT,

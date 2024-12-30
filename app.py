@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, redirect, flash, session
+from flask import Flask, render_template, request, url_for, redirect, session
 import mysql.connector
 from time import sleep
 from date_calc import *
@@ -6,7 +6,6 @@ import datetime
 import matplotlib.pyplot as plt
 
 app = Flask(__name__, template_folder="f_templates")
-app.secret_key = "77d48e2e153c7796b4bdd39598f9935b6165f26ff8e1eb3b"
 
 @app.before_request
 def initialize_session():
@@ -27,7 +26,6 @@ cursor = db.cursor()
 def login_required(f):
     def decorated_function(*args, **kwargs):
         if session.get('username') is None or session.get('userid') is None:
-            flash("Please log in to access this page.", "warning")
             return redirect(url_for('login'))
         return f(*args, **kwargs)
     decorated_function.__name__ = f.__name__
@@ -53,17 +51,14 @@ def login():
         if user and user[1] == password:  
             session['username'] = user[2]  
             session['userid'] = user[0]
-            flash("Login successful!", "success")
             return redirect(url_for('index'))
         else:
-            flash("Invalid username or password.", "danger")
             return redirect(url_for('login'))
 
 @app.route("/logout")
 def logout():
     session.pop('username', None)
     session.pop('userid', None)
-    flash("You have been logged out.", "success")
     return redirect(url_for('index'))
 
 @app.route("/schemes")
@@ -86,10 +81,16 @@ def graphs():
         curr_amount=((curr_amt*i*rate)/100)+curr_amt
         amount_lst.append(curr_amount)
 
-    plt.plot(years,amount_lst)
-    plt.title("Investment Growth")
+    plt.plot(years, amount_lst, marker='o', linestyle='-', color='b', label='Investment Value')
+
+    for year, amount in zip(years, amount_lst):
+        plt.annotate(f'{year}: {amount:.2f}', xy=(year, amount), xytext=(year, amount + 100))
+    plt.title("Investment Growth Over Time")
     plt.xlabel("Years")
-    plt.ylabel("Amount")
+    plt.ylabel("Amount (in rupees)")
+    plt.grid(True)
+    plt.legend()
+
     plt.show()
 
     return redirect("http://127.0.0.1:3000/schemes")
@@ -200,7 +201,6 @@ def savings():
             db.commit()
             return redirect(url_for('schemes'))
         else:
-            flash("User details not found. Please try again.", "warning")
             return redirect(url_for("savings"))
 
 if __name__ == "__main__":

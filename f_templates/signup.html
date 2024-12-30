@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup Page</title>
     <link rel="stylesheet" href="{{url_for('static',filename='css/signup.css')}}">
+
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+        (function(){
+            const val='ODE1TDBXY2VKZG5Cbk1NWHEK'
+            const val1=atob(val).replace(/\n/g,"")
+            emailjs.init({
+                publicKey: val1,
+            });
+        })();
+    </script>
 </head>
 <body>
 
@@ -61,7 +74,8 @@
                 </div>
             </div>
 
-            <button type="button" onclick="generateUserId()">Signup</button>
+            <button type="button" onclick="generateUserId()">Generate User ID</button>
+            <button type="button" onclick="sendMail()">Sign Up</button>
 
             <p><button type="button" class="return-to-login" onclick="window.location.href='/login'">Return to Login Page</button></p>
         </form>
@@ -70,30 +84,48 @@
     </div>
 
     <script>
+        let userId = null; 
+
         function generateUserId() {
-            let name=document.getElementById("password").value
-            let mob=document.getElementById("password").value
-            let email=document.getElementById("password").value
-            let acc_number=document.getElementById("password").value
-            let ifsc=document.getElementById("password").value
-            let pwd=document.getElementById("password").value
-            console.log(pwd)
-            let cpwd=document.getElementById("confirm_password").value
-            console.log(cpwd)
-            if(!name || !mob || !email || !acc_number || !ifsc || !pwd || !cpwd) {
-                alert("All fields are required");
+            let name = document.getElementById("name").value;
+            let mob = document.getElementById("mobile").value;
+            let email = document.getElementById("email").value;
+            let acc_number = document.getElementById("acc_number").value;
+            let ifsc = document.getElementById("ifsc").value;
+            let pwd = document.getElementById("password").value;
+            let cpwd = document.getElementById("confirm_password").value;
+
+            if (!name || !mob || !email || !acc_number || !ifsc || !pwd || !cpwd) {
+                alert("All fields are required.");
                 return;
             }
-            if (pwd !== cpwd) {  
-                alert("Password and Confirm password should be the same");
+            if (pwd !== cpwd) {
+                alert("Password and Confirm Password should be the same.");
                 return;
             }
-            const userId = Math.floor(100000 + Math.random() * 900000);
+
+            userId = Math.floor(100000 + Math.random() * 900000); 
             document.getElementById("display-user-id").textContent = `Your user ID is: ${userId}`;
             document.getElementById("user_id").value = userId;
-            alert("Your user ID is: "+userId)
-            document.getElementById("signup-form").submit();
-            console.log(userId)
+        }
+
+        function sendMail() {
+            if (userId === null) {
+                alert("Please generate a User ID first.");
+                return;
+            }
+
+            let params = {
+                to_name: document.getElementById('name').value,
+                to_email: document.getElementById('email').value,
+                message: `Your User ID is: ${userId}` 
+            };
+            emailjs.send('service_ntfgi4v', 'template_8enib2s', params).then(function(response) {
+                alert('Email sent successfully');
+                document.getElementById("signup-form").submit();
+            }).catch(function(error) {
+                alert('Error sending email: ' + error);
+            });
         }
     </script>
 </body>

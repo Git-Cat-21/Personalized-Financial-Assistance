@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, url_for, redirect, flash, ses
 import mysql.connector
 from time import sleep
 from date_calc import *
+import datetime
+import matplotlib.pyplot as plt
 
 app = Flask(__name__, template_folder="f_templates")
 app.secret_key = "77d48e2e153c7796b4bdd39598f9935b6165f26ff8e1eb3b"
@@ -68,7 +70,30 @@ def logout():
 def schemes():
     return redirect("http://127.0.0.1:3000/schemes")
 
-   
+@app.route("/graphs",methods=['GET','POST'])
+def graphs():
+    scheme_id = request.form.get('Scheme_ID')
+    amount = request.form.get('Amount')
+    duration=int(request.form.get("duration_hide"))
+    rate=float(request.form.get("rate_hide"))
+    curr_year=int(datetime.datetime.now().year)
+
+    years=[curr_year+x for x in range(duration + 1)]
+    curr_amt=int(amount)
+    amount_lst=[curr_amt]
+
+    for i in range(1,len(years)):
+        curr_amount=((curr_amt*i*rate)/100)+curr_amt
+        amount_lst.append(curr_amount)
+
+    plt.plot(years,amount_lst)
+    plt.title("Investment Growth")
+    plt.xlabel("Years")
+    plt.ylabel("Amount")
+    plt.show()
+
+    return redirect("http://127.0.0.1:3000/schemes")
+
 @app.route("/forgot_pwd", methods=['GET', 'POST'])
 def forgot_pwd():
     if request.method == 'GET':

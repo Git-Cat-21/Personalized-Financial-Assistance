@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, redirect, session
+from flask import Flask, render_template, request, url_for, redirect, session, flash
 import mysql.connector
 from time import sleep
 from date_calc import *
@@ -6,6 +6,7 @@ import datetime
 import matplotlib.pyplot as plt
 
 app = Flask(__name__, template_folder="f_templates")
+app.secret_key = "77d48e2e153c7796b4bdd39598f9935b6165f26ff8e1eb3b"
 
 @app.before_request
 def initialize_session():

@@ -47,3 +47,10 @@ python app.py
 ```
 
 > This will start the backend services on both Node.js and Python. Keep both terminals open to run the services simultaneously.
+
+----
+### To Do 
+- [ ] To add ChatBot suggestions.
+- [ ] To generate a statement per user 
+- [ ] A password protected PDF of the statement 
+- [ ] Mail statement to the user

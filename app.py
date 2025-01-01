@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, redirect, session
+from flask import Flask, render_template, request, url_for, redirect, session, flash
 import mysql.connector
 from time import sleep
 from date_calc import *

@@ -9,7 +9,7 @@ CREATE TABLE USER_DETAILS(
     Mob long,
     Email_id VARCHAR(30) constraint ck2 check(Email_id like '%_@__%.__%'),
     Dob DATE,
-    Pwd VARCHAR(20)
+    Pwd VARCHAR(100)
 );
 -- if you run into an error saying ck1 constraint is violated please run the following commands 
 

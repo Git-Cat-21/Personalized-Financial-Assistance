@@ -4,6 +4,7 @@ from time import sleep
 from date_calc import *
 import datetime
 import matplotlib.pyplot as plt
+import bcrypt
 
 app = Flask(__name__, template_folder="f_templates")
 app.secret_key = "77d48e2e153c7796b4bdd39598f9935b6165f26ff8e1eb3b"
@@ -49,7 +50,8 @@ def login():
         cursor = db.cursor()
         cursor.execute('SELECT User_ID, Pwd, User_name FROM user_details WHERE User_ID = %s', (username,))
         user = cursor.fetchone()
-        if user and user[1] == password:  
+        # if user and user[1] == password: 
+        if user and bcrypt.checkpw(password.encode('utf-8'),user[1].encode('utf-8')):
             session['username'] = user[2]  
             session['userid'] = user[0]
             return redirect(url_for('index'))
@@ -151,9 +153,12 @@ def signup():
         status = request.form['status']
         acc_type = request.form['acc_type']
         created_on = request.form['created_on']
+        cursor = db.cursor()
+        
         if password == conf_pwd:
-            cursor = db.cursor()
-            cursor.execute('''INSERT INTO user_details (user_id, user_name, mob, email_id, dob, pwd) VALUES (%s, %s, %s, %s, %s, %s)''', (user_id, name, mobile, email, dob, password))
+            salt = bcrypt.gensalt()
+            hashed_pass = bcrypt.hashpw(password.encode('utf-8'), salt).decode('utf-8')            
+            cursor.execute('''INSERT INTO user_details (user_id, user_name, mob, email_id, dob, pwd) VALUES (%s, %s, %s, %s, %s, %s)''', (user_id, name, mobile, email, dob, hashed_pass))
             cursor.execute('''INSERT INTO account_details (acc_no, ifsc, pan, acc_status, acc_type, acc_create, user_id) VALUES (%s, %s, %s, %s, %s, %s, %s)''', (acc_number, ifsc, pan, status, acc_type, created_on, user_id))
             db.commit()
         else:
